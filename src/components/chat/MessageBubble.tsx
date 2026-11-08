@@ -18,9 +18,11 @@ import { StickerReactionPicker } from "@/components/stickers/StickerReactionPick
 import { PhotoLightbox } from "./PhotoLightbox";
 import { useChat } from "@/context/ChatContext";
 
-interface MessageBubbleProps {
+export interface MessageBubbleProps {
   message: DecryptedMessage;
   isMe: boolean;
+  isNew?: boolean;
+  isLastInGroup?: boolean;
   onReply: (message: DecryptedMessage) => void;
   onEdit: (message: DecryptedMessage) => void;
   onUnsend: (message: DecryptedMessage) => void;
@@ -29,9 +31,11 @@ interface MessageBubbleProps {
   onVisible: (messageId: string) => void;
 }
 
-export function MessageBubble({
+function MessageBubbleComponent({
   message,
   isMe,
+  isNew = false,
+  isLastInGroup = true,
   onReply,
   onEdit,
   onUnsend,
@@ -79,13 +83,13 @@ export function MessageBubble({
     }
   }, [message.type, message.payload.photo, photoUrl, fetchAndDecryptPhoto]);
 
-  // Double tap to react with heart
+  // Double tap to react with heart burst (Phase 3.3)
   const handleTouchOrClick = () => {
     const now = Date.now();
     if (now - lastTapRef.current < 320) {
       // Double tap detected!
       setShowHeartBurst(true);
-      setTimeout(() => setShowHeartBurst(false), 900);
+      setTimeout(() => setShowHeartBurst(false), 650);
       onToggleHeart(message.id);
       lastTapRef.current = 0;
     } else {
@@ -106,13 +110,12 @@ export function MessageBubble({
     payload.seenBy &&
     Object.keys(payload.seenBy).some((devId) => devId !== message.sender_device_id);
 
-  // Check if message has an expiry countdown
   const isExpiring = Boolean(message.expires_at);
 
   if (payload.isUnsent) {
     return (
-      <div className={`flex w-full my-1.5 ${isMe ? "justify-end" : "justify-start"}`}>
-        <div className="px-4 py-2 rounded-2xl border border-slate-200/70 bg-slate-50/80 text-xs italic text-slate-400">
+      <div className={`message-row flex w-full my-1 ${isMe ? "justify-end" : "justify-start"}`}>
+        <div className="px-3.5 py-1.5 rounded-2xl border border-blush/60 bg-cream-2/70 text-xs italic text-plum-soft">
           This message was unsent
         </div>
       </div>
@@ -123,52 +126,53 @@ export function MessageBubble({
   if (message.type === "photo") {
     return (
       <div
-        className={`relative flex flex-col group my-2 ${
+        className={`message-row relative flex flex-col group ${isLastInGroup ? "mb-2" : "mb-0.5"} ${
           isMe ? "items-end" : "items-start"
-        }`}
+        } ${isNew ? "animate-message-in" : ""}`}
       >
         {/* Reply Reference */}
         {payload.replyTo && (
           <div
-            className={`flex items-center gap-1.5 text-[11px] px-3 py-1 mb-1 rounded-xl bg-slate-100/90 text-slate-500 max-w-[80%] truncate ${
+            className={`flex items-center gap-1.5 text-[11px] px-3 py-1 mb-1 rounded-xl bg-cream-2/80 text-plum-soft max-w-[80%] truncate ${
               isMe ? "mr-1" : "ml-1"
             }`}
           >
-            <Reply className="w-3 h-3 shrink-0 text-slate-400" />
-            <span className="truncate">"{payload.replyTo.snippet}"</span>
+            <Reply className="w-3 h-3 shrink-0 text-plum-soft" />
+            <span className="truncate italic font-hand text-[13px]">"{payload.replyTo.snippet}"</span>
           </div>
         )}
 
-        <div className="relative max-w-[75%] select-none">
+        <div className="relative max-w-[78%] select-none">
+          {/* Reserved aspect ratio placeholder (Phase 3.2: eliminate layout shift) */}
           <div
             onClick={() => {
               handleTouchOrClick();
               if (photoUrl) setShowLightbox(true);
             }}
-            className="rounded-3xl overflow-hidden border border-rose-100/60 shadow-soft bg-rose-50/40 cursor-pointer active:scale-[0.99] transition relative"
+            className="w-60 max-w-full aspect-[4/3] rounded-3xl overflow-hidden border border-blush/60 shadow-soft bg-peach/20 backdrop-blur-xs cursor-pointer active:scale-[0.99] transition relative"
           >
             {isLoadingPhoto && !photoUrl ? (
-              <div className="w-56 h-56 flex flex-col items-center justify-center text-slate-400 gap-2 bg-slate-100 animate-pulse">
-                <Loader2 className="w-6 h-6 animate-spin text-rose-400" />
-                <span className="text-xs">Decrypting photo...</span>
+              <div className="w-full h-full flex flex-col items-center justify-center text-plum-soft gap-2 bg-cream-2/60 animate-pulse">
+                <Loader2 className="w-6 h-6 animate-spin text-crimson" />
+                <span className="text-xs font-hand">decrypting photo...</span>
               </div>
             ) : photoUrl ? (
               <img
                 src={photoUrl}
                 alt="Shared photo"
-                className="w-full max-h-72 object-cover rounded-3xl"
+                className="w-full h-full object-cover rounded-3xl"
                 loading="lazy"
               />
             ) : (
-              <div className="w-56 h-40 flex flex-col items-center justify-center text-slate-400 gap-1 bg-slate-100">
-                <ImageIcon className="w-6 h-6 text-slate-300" />
+              <div className="w-full h-full flex flex-col items-center justify-center text-plum-soft gap-1 bg-cream-2/40">
+                <ImageIcon className="w-6 h-6 text-rose" />
                 <span className="text-xs">Unable to load photo</span>
               </div>
             )}
 
             {/* Photo Footer overlay */}
-            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-2.5 flex items-center justify-between text-[10px] text-white/90">
-              <div className="flex items-center gap-1">
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-2.5 flex items-center justify-between text-[11px] text-white">
+              <div className="flex items-center gap-1 font-hand text-[13px]">
                 {isExpiring && (
                   <span title="Disappearing photo" className="flex items-center gap-0.5 text-amber-300">
                     <Clock className="w-3 h-3" />
@@ -177,42 +181,54 @@ export function MessageBubble({
                 <span>{timeStr}</span>
               </div>
 
-              {isMe && isSeenByPartner && (
-                <span title="Seen by partner" className="inline-flex items-center ml-0.5">
-                  <Heart className="w-3 h-3 fill-rose-400 text-rose-400" />
+              {isMe && (
+                <span title={isSeenByPartner ? "Seen by partner" : "Sent"} className="inline-flex items-center ml-0.5">
+                  <Heart
+                    className={`w-3 h-3 ${
+                      isSeenByPartner ? "fill-crimson text-crimson" : "text-white/80"
+                    }`}
+                  />
                 </span>
               )}
             </div>
           </div>
 
-          {/* Double-tap Floating Heart Burst Animation */}
+          {/* Double-tap Floating Heart Burst (6 tiny flying hearts - Phase 3.3) */}
           {showHeartBurst && (
-            <div className="absolute inset-0 pointer-events-none flex items-center justify-center animate-bounce z-20">
-              <Heart className="w-14 h-14 fill-rose-500 text-rose-500 drop-shadow-xl scale-125 transition-transform" />
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
+              <span className="absolute animate-heart-burst-1 text-crimson text-sm">❤️</span>
+              <span className="absolute animate-heart-burst-2 text-rose text-base">💖</span>
+              <span className="absolute animate-heart-burst-3 text-crimson text-sm">💕</span>
+              <span className="absolute animate-heart-burst-4 text-berry text-xs">💓</span>
+              <span className="absolute animate-heart-burst-5 text-peach text-sm">💗</span>
+              <span className="absolute animate-heart-burst-6 text-crimson text-lg">❤️</span>
             </div>
           )}
 
-          {/* Heart Reactions Badge */}
+          {/* Persistent Heart Reaction Badge Pop-in (Phase 3.3) */}
           {hasReactions && (
             <div
               onClick={(e) => {
                 e.stopPropagation();
                 onToggleHeart(message.id);
               }}
-              className={`absolute -bottom-2 ${
+              className={`absolute -bottom-2.5 ${
                 isMe ? "left-2" : "right-2"
-              } bg-white border border-rose-100 rounded-full px-1.5 py-0.5 shadow-sm flex items-center gap-0.5 text-[11px] cursor-pointer`}
+              } bg-surface border border-blush/80 rounded-full px-2 py-0.5 shadow-sm flex items-center gap-0.5 text-xs cursor-pointer active:scale-95 transition animate-pop-in z-10`}
             >
               <span>❤️</span>
+              {Object.keys(payload.reactions || {}).length > 1 && (
+                <span className="text-[10px] font-bold text-crimson font-body">2</span>
+              )}
             </div>
           )}
 
           {/* Sticker Reaction Badges */}
           {hasStickerReactions && (
             <div
-              className={`absolute -bottom-2 ${
-                isMe ? "left-10" : "right-10"
-              } flex items-center gap-1`}
+              className={`absolute -bottom-2.5 ${
+                isMe ? "left-11" : "right-11"
+              } flex items-center gap-1 z-10`}
             >
               {Object.entries(payload.stickerReactions || {}).map(([dev, stId]) => {
                 const def = getStickerById(stId);
@@ -224,7 +240,7 @@ export function MessageBubble({
                       e.stopPropagation();
                       onToggleStickerReaction?.(message.id, stId);
                     }}
-                    className="w-6 h-6 p-0.5 rounded-full bg-white border border-rose-100 shadow-sm cursor-pointer active:scale-95 transition"
+                    className="w-6 h-6 p-0.5 rounded-full bg-surface border border-blush/80 shadow-sm cursor-pointer active:scale-95 transition"
                     title={def.name}
                   >
                     <img src={def.file} alt={def.name} className="w-full h-full object-contain" />
@@ -238,8 +254,8 @@ export function MessageBubble({
           <button
             onClick={() => setShowMenu(!showMenu)}
             className={`absolute top-2 ${
-              isMe ? "-left-8" : "-right-8"
-            } p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 opacity-0 group-hover:opacity-100 transition`}
+              isMe ? "-left-9" : "-right-9"
+            } w-8 h-8 rounded-full flex items-center justify-center text-plum-soft hover:text-plum hover:bg-cream-2 opacity-0 group-hover:opacity-100 transition`}
             aria-label="Message options"
           >
             <MoreHorizontal className="w-3.5 h-3.5" />
@@ -250,16 +266,16 @@ export function MessageBubble({
             <div
               className={`absolute top-8 ${
                 isMe ? "right-0" : "left-0"
-              } z-30 bg-white border border-slate-200 shadow-xl rounded-2xl py-1.5 w-36 text-xs text-slate-700`}
+              } z-30 bg-surface border border-blush shadow-xl rounded-2xl py-1.5 w-36 text-xs text-plum font-body`}
             >
               <button
                 onClick={() => {
                   setShowMenu(false);
                   onReply(message);
                 }}
-                className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-slate-700 transition"
+                className="w-full px-3.5 py-2 hover:bg-cream-2 flex items-center gap-2 transition"
               >
-                <Reply className="w-3.5 h-3.5 text-rose-500" />
+                <Reply className="w-3.5 h-3.5 text-crimson" />
                 Reply
               </button>
 
@@ -268,9 +284,9 @@ export function MessageBubble({
                   setShowMenu(false);
                   setShowStickerPicker(true);
                 }}
-                className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-slate-700 transition"
+                className="w-full px-3.5 py-2 hover:bg-cream-2 flex items-center gap-2 transition"
               >
-                <SmilePlus className="w-3.5 h-3.5 text-amber-500" />
+                <SmilePlus className="w-3.5 h-3.5 text-peach" />
                 Sticker React
               </button>
 
@@ -280,7 +296,7 @@ export function MessageBubble({
                     setShowMenu(false);
                     onUnsend(message);
                   }}
-                  className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-rose-600 transition"
+                  className="w-full px-3.5 py-2 hover:bg-cream-2 flex items-center gap-2 text-crimson transition"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   Unsend
@@ -317,9 +333,9 @@ export function MessageBubble({
 
     return (
       <div
-        className={`relative flex flex-col group my-2 ${
+        className={`message-row relative flex flex-col group ${isLastInGroup ? "mb-2" : "mb-0.5"} ${
           isMe ? "items-end" : "items-start"
-        }`}
+        } ${isNew ? "animate-message-in" : ""}`}
       >
         <div className="relative select-none" onClick={handleTouchOrClick}>
           <div className="w-36 h-36 p-1 transition-transform active:scale-95 cursor-pointer flex items-center justify-center">
@@ -342,21 +358,30 @@ export function MessageBubble({
               </span>
             )}
             <span>{timeStr}</span>
-            {isMe && isSeenByPartner && (
-              <span title="Seen by partner" className="inline-flex items-center ml-0.5">
-                <Heart className="w-2.5 h-2.5 fill-rose-400 text-rose-400" />
+            {isMe && (
+              <span title={isSeenByPartner ? "Seen by partner" : "Sent"} className="inline-flex items-center ml-0.5">
+                <Heart
+                  className={`w-2.5 h-2.5 ${
+                    isSeenByPartner ? "fill-crimson text-crimson" : "text-rose/60"
+                  }`}
+                />
               </span>
             )}
           </div>
 
-          {/* Double-tap Floating Heart Burst Animation */}
+          {/* Double-tap Floating Heart Burst */}
           {showHeartBurst && (
-            <div className="absolute inset-0 pointer-events-none flex items-center justify-center animate-bounce z-20">
-              <Heart className="w-12 h-12 fill-rose-500 text-rose-500 drop-shadow-lg scale-125 transition-transform" />
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
+              <span className="absolute animate-heart-burst-1 text-crimson text-sm">❤️</span>
+              <span className="absolute animate-heart-burst-2 text-rose text-base">💖</span>
+              <span className="absolute animate-heart-burst-3 text-crimson text-sm">💕</span>
+              <span className="absolute animate-heart-burst-4 text-berry text-xs">💓</span>
+              <span className="absolute animate-heart-burst-5 text-peach text-sm">💗</span>
+              <span className="absolute animate-heart-burst-6 text-crimson text-lg">❤️</span>
             </div>
           )}
 
-          {/* Heart Reactions Badge */}
+          {/* Persistent Heart Reaction Badge Pop-in */}
           {hasReactions && (
             <div
               onClick={(e) => {
@@ -365,7 +390,7 @@ export function MessageBubble({
               }}
               className={`absolute -bottom-2 ${
                 isMe ? "left-2" : "right-2"
-              } bg-white border border-rose-100 rounded-full px-1.5 py-0.5 shadow-sm flex items-center gap-0.5 text-[11px] cursor-pointer`}
+              } bg-surface border border-blush/80 rounded-full px-2 py-0.5 shadow-sm flex items-center gap-0.5 text-xs cursor-pointer animate-pop-in z-10`}
             >
               <span>❤️</span>
             </div>
@@ -376,7 +401,7 @@ export function MessageBubble({
             <div
               className={`absolute -bottom-2 ${
                 isMe ? "left-10" : "right-10"
-              } flex items-center gap-1`}
+              } flex items-center gap-1 z-10`}
             >
               {Object.entries(payload.stickerReactions || {}).map(([dev, stId]) => {
                 const def = getStickerById(stId);
@@ -388,7 +413,7 @@ export function MessageBubble({
                       e.stopPropagation();
                       onToggleStickerReaction?.(message.id, stId);
                     }}
-                    className="w-6 h-6 p-0.5 rounded-full bg-white border border-rose-100 shadow-sm cursor-pointer active:scale-95 transition"
+                    className="w-6 h-6 p-0.5 rounded-full bg-surface border border-blush/80 shadow-sm cursor-pointer active:scale-95 transition"
                     title={def.name}
                   >
                     <img src={def.file} alt={def.name} className="w-full h-full object-contain" />
@@ -397,69 +422,7 @@ export function MessageBubble({
               })}
             </div>
           )}
-
-          {/* Action Trigger Button */}
-          <button
-            onClick={() => setShowMenu(!showMenu)}
-            className={`absolute top-2 ${
-              isMe ? "-left-8" : "-right-8"
-            } p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 opacity-0 group-hover:opacity-100 transition`}
-            aria-label="Message options"
-          >
-            <MoreHorizontal className="w-3.5 h-3.5" />
-          </button>
-
-          {/* Context Menu Dropdown */}
-          {showMenu && (
-            <div
-              className={`absolute top-8 ${
-                isMe ? "right-0" : "left-0"
-              } z-30 bg-white border border-slate-200 shadow-xl rounded-2xl py-1.5 w-36 text-xs text-slate-700`}
-            >
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  onReply(message);
-                }}
-                className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-slate-700 transition"
-              >
-                <Reply className="w-3.5 h-3.5 text-rose-500" />
-                Reply
-              </button>
-
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  setShowStickerPicker(true);
-                }}
-                className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-slate-700 transition"
-              >
-                <SmilePlus className="w-3.5 h-3.5 text-amber-500" />
-                Sticker React
-              </button>
-
-              {isMe && (
-                <button
-                  onClick={() => {
-                    setShowMenu(false);
-                    onUnsend(message);
-                  }}
-                  className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-rose-600 transition"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                  Unsend
-                </button>
-              )}
-            </div>
-          )}
         </div>
-
-        {showStickerPicker && (
-          <StickerReactionPicker
-            onSelectReaction={(stId) => onToggleStickerReaction?.(message.id, stId)}
-            onClose={() => setShowStickerPicker(false)}
-          />
-        )}
       </div>
     );
   }
@@ -471,45 +434,54 @@ export function MessageBubble({
 
     return (
       <div
-        className={`relative flex flex-col group my-2 ${
+        className={`message-row relative flex flex-col group ${isLastInGroup ? "mb-2" : "mb-0.5"} ${
           isMe ? "items-end" : "items-start"
-        }`}
+        } ${isNew ? "animate-message-in" : ""}`}
       >
         <div
           onClick={handleTouchOrClick}
           className={`px-4 py-3 rounded-2xl border text-xs shadow-soft transition active:scale-[0.99] cursor-pointer max-w-[85%] ${
             isMe
-              ? "bg-amber-500 text-white border-amber-600 rounded-br-sm"
-              : "bg-white border-amber-200 text-slate-800 rounded-bl-sm"
+              ? "bg-gradient-to-r from-crimson to-berry text-white border-crimson rounded-br-sm"
+              : "bg-surface border-blush text-plum rounded-bl-sm"
           }`}
         >
           <div className="flex items-center gap-2 mb-1">
             <span className="text-base">{emoji}</span>
-            <span className={`font-bold uppercase tracking-wider text-[10px] ${isMe ? "text-amber-100" : "text-amber-600"}`}>
+            <span className={`font-bold uppercase tracking-wider text-[10px] ${isMe ? "text-cream-2" : "text-berry"}`}>
               Coded Signal
             </span>
           </div>
 
-          <p className="font-semibold text-sm leading-snug">{payload.text}</p>
+          <p className="font-semibold text-sm leading-snug font-body">{payload.text}</p>
 
           <div
-            className={`flex items-center justify-end gap-1.5 text-[10px] mt-2 select-none ${
-              isMe ? "text-amber-100" : "text-slate-400"
+            className={`flex items-center justify-end gap-1.5 font-hand text-[13px] mt-2 select-none ${
+              isMe ? "text-blush" : "text-plum-soft"
             }`}
           >
             <span>{timeStr}</span>
-            {isMe && isSeenByPartner && (
-              <span title="Seen by partner" className="inline-flex items-center ml-0.5">
-                <Heart className="w-2.5 h-2.5 fill-amber-200 text-amber-200" />
+            {isMe && (
+              <span title={isSeenByPartner ? "Seen by partner" : "Sent"} className="inline-flex items-center ml-0.5">
+                <Heart
+                  className={`w-2.5 h-2.5 ${
+                    isSeenByPartner ? "fill-crimson text-crimson" : "text-blush/60"
+                  }`}
+                />
               </span>
             )}
           </div>
         </div>
 
-        {/* Double-tap Floating Heart Burst Animation */}
+        {/* Double-tap Floating Heart Burst */}
         {showHeartBurst && (
-          <div className="absolute inset-0 pointer-events-none flex items-center justify-center animate-bounce z-20">
-            <Heart className="w-12 h-12 fill-rose-500 text-rose-500 drop-shadow-lg scale-125 transition-transform" />
+          <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
+            <span className="absolute animate-heart-burst-1 text-crimson text-sm">❤️</span>
+            <span className="absolute animate-heart-burst-2 text-rose text-base">💖</span>
+            <span className="absolute animate-heart-burst-3 text-crimson text-sm">💕</span>
+            <span className="absolute animate-heart-burst-4 text-berry text-xs">💓</span>
+            <span className="absolute animate-heart-burst-5 text-peach text-sm">💗</span>
+            <span className="absolute animate-heart-burst-6 text-crimson text-lg">❤️</span>
           </div>
         )}
       </div>
@@ -519,30 +491,34 @@ export function MessageBubble({
   // --- STANDARD TEXT MESSAGE ---
   return (
     <div
-      className={`relative flex flex-col group my-1.5 ${
+      className={`message-row relative flex flex-col group ${isLastInGroup ? "mb-2" : "mb-0.5"} ${
         isMe ? "items-end" : "items-start"
-      }`}
+      } ${isNew ? "animate-message-in" : ""}`}
     >
       {/* Reply Reference Bubble */}
       {payload.replyTo && (
         <div
-          className={`flex items-center gap-1.5 text-[11px] px-3 py-1 mb-1 rounded-xl bg-slate-100/90 text-slate-500 max-w-[80%] truncate ${
+          className={`flex items-center gap-1.5 text-[11px] px-3 py-1 mb-1 rounded-xl bg-cream-2/80 text-plum-soft max-w-[80%] truncate ${
             isMe ? "mr-1" : "ml-1"
           }`}
         >
-          <Reply className="w-3 h-3 shrink-0 text-slate-400" />
-          <span className="truncate">"{payload.replyTo.snippet}"</span>
+          <Reply className="w-3 h-3 shrink-0 text-plum-soft" />
+          <span className="truncate italic font-hand text-[13px]">"{payload.replyTo.snippet}"</span>
         </div>
       )}
 
-      {/* Main Message Bubble */}
+      {/* Main Message Bubble (Phase 1.1 + Phase 3.2: 16px/1.45 Nunito, grouped corners) */}
       <div className="relative max-w-[82%] select-none">
         <div
           onClick={handleTouchOrClick}
           className={`px-4 py-2.5 transition active:scale-[0.99] cursor-pointer break-words text-[16px] leading-[1.45] font-body ${
             isMe
-              ? "bg-gradient-to-br from-crimson to-berry text-white rounded-[20px] rounded-br-[6px] shadow-sm"
-              : "bg-surface border border-blush text-plum rounded-[20px] rounded-bl-[6px] shadow-bubble"
+              ? `bg-gradient-to-br from-crimson to-berry text-white ${
+                  isLastInGroup ? "rounded-[20px] rounded-br-[6px]" : "rounded-[20px]"
+                } shadow-sm`
+              : `bg-surface border border-blush text-plum ${
+                  isLastInGroup ? "rounded-[20px] rounded-bl-[6px]" : "rounded-[20px]"
+                } shadow-bubble`
           }`}
         >
           <p className="whitespace-pre-wrap">{payload.text}</p>
@@ -561,23 +537,32 @@ export function MessageBubble({
             {payload.editedAt && <span>(edited)</span>}
             <span>{timeStr}</span>
 
-            {/* Seen status shown as a small heart */}
-            {isMe && isSeenByPartner && (
-              <span title="Seen by partner" className="inline-flex items-center ml-0.5">
-                <Heart className="w-2.5 h-2.5 fill-rose text-rose" />
+            {/* Seen status: tiny heart (hollow = sent, filled with crimson = seen - Phase 3.3) */}
+            {isMe && (
+              <span title={isSeenByPartner ? "Seen by partner" : "Sent"} className="inline-flex items-center ml-0.5">
+                <Heart
+                  className={`w-2.5 h-2.5 ${
+                    isSeenByPartner ? "fill-crimson text-crimson" : "text-rose/60"
+                  }`}
+                />
               </span>
             )}
           </div>
         </div>
 
-        {/* Double-tap Floating Heart Burst Animation */}
+        {/* Double-tap Floating Heart Burst (Phase 3.3) */}
         {showHeartBurst && (
-          <div className="absolute inset-0 pointer-events-none flex items-center justify-center animate-bounce z-20">
-            <Heart className="w-12 h-12 fill-rose-500 text-rose-500 drop-shadow-lg scale-125 transition-transform" />
+          <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
+            <span className="absolute animate-heart-burst-1 text-crimson text-sm">❤️</span>
+            <span className="absolute animate-heart-burst-2 text-rose text-base">💖</span>
+            <span className="absolute animate-heart-burst-3 text-crimson text-sm">💕</span>
+            <span className="absolute animate-heart-burst-4 text-berry text-xs">💓</span>
+            <span className="absolute animate-heart-burst-5 text-peach text-sm">💗</span>
+            <span className="absolute animate-heart-burst-6 text-crimson text-lg">❤️</span>
           </div>
         )}
 
-        {/* Heart Reaction Badge */}
+        {/* Persistent Heart Reaction Badge Pop-in (Phase 3.3) */}
         {hasReactions && (
           <div
             onClick={(e) => {
@@ -586,11 +571,11 @@ export function MessageBubble({
             }}
             className={`absolute -bottom-2.5 ${
               isMe ? "left-2" : "right-2"
-            } bg-white border border-rose-100 rounded-full px-1.5 py-0.5 shadow-sm flex items-center gap-0.5 text-[11px] cursor-pointer active:scale-95 transition`}
+            } bg-surface border border-blush/80 rounded-full px-2 py-0.5 shadow-sm flex items-center gap-0.5 text-xs cursor-pointer active:scale-95 transition animate-pop-in z-10`}
           >
             <span>❤️</span>
             {Object.keys(payload.reactions || {}).length > 1 && (
-              <span className="text-[10px] font-bold text-rose-500">2</span>
+              <span className="text-[10px] font-bold text-crimson font-body">2</span>
             )}
           </div>
         )}
@@ -600,7 +585,7 @@ export function MessageBubble({
           <div
             className={`absolute -bottom-2.5 ${
               isMe ? "left-10" : "right-10"
-            } flex items-center gap-1`}
+            } flex items-center gap-1 z-10`}
           >
             {Object.entries(payload.stickerReactions || {}).map(([dev, stId]) => {
               const def = getStickerById(stId);
@@ -612,7 +597,7 @@ export function MessageBubble({
                     e.stopPropagation();
                     onToggleStickerReaction?.(message.id, stId);
                   }}
-                  className="w-6 h-6 p-0.5 rounded-full bg-white border border-rose-100 shadow-sm cursor-pointer active:scale-95 transition"
+                  className="w-6 h-6 p-0.5 rounded-full bg-surface border border-blush/80 shadow-sm cursor-pointer active:scale-95 transition"
                   title={def.name}
                 >
                   <img src={def.file} alt={def.name} className="w-full h-full object-contain" />
@@ -626,8 +611,8 @@ export function MessageBubble({
         <button
           onClick={() => setShowMenu(!showMenu)}
           className={`absolute top-2 ${
-            isMe ? "-left-8" : "-right-8"
-          } p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 opacity-0 group-hover:opacity-100 transition`}
+            isMe ? "-left-9" : "-right-9"
+          } w-8 h-8 rounded-full flex items-center justify-center text-plum-soft hover:text-plum hover:bg-cream-2 opacity-0 group-hover:opacity-100 transition`}
           aria-label="Message options"
         >
           <MoreHorizontal className="w-3.5 h-3.5" />
@@ -638,16 +623,16 @@ export function MessageBubble({
           <div
             className={`absolute top-8 ${
               isMe ? "right-0" : "left-0"
-            } z-30 bg-white border border-slate-200 shadow-xl rounded-2xl py-1.5 w-36 text-xs text-slate-700`}
+            } z-30 bg-surface border border-blush shadow-xl rounded-2xl py-1.5 w-36 text-xs text-plum font-body`}
           >
             <button
               onClick={() => {
                 setShowMenu(false);
                 onReply(message);
               }}
-              className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-slate-700 transition"
+              className="w-full px-3.5 py-2 hover:bg-cream-2 flex items-center gap-2 transition"
             >
-              <Reply className="w-3.5 h-3.5 text-rose-500" />
+              <Reply className="w-3.5 h-3.5 text-crimson" />
               Reply
             </button>
 
@@ -656,9 +641,9 @@ export function MessageBubble({
                 setShowMenu(false);
                 setShowStickerPicker(true);
               }}
-              className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-slate-700 transition"
+              className="w-full px-3.5 py-2 hover:bg-cream-2 flex items-center gap-2 transition"
             >
-              <SmilePlus className="w-3.5 h-3.5 text-amber-500" />
+              <SmilePlus className="w-3.5 h-3.5 text-peach" />
               Sticker React
             </button>
 
@@ -669,9 +654,9 @@ export function MessageBubble({
                     setShowMenu(false);
                     onEdit(message);
                   }}
-                  className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-slate-700 transition"
+                  className="w-full px-3.5 py-2 hover:bg-cream-2 flex items-center gap-2 transition"
                 >
-                  <Edit3 className="w-3.5 h-3.5 text-slate-500" />
+                  <Edit3 className="w-3.5 h-3.5 text-plum-soft" />
                   Edit
                 </button>
 
@@ -680,7 +665,7 @@ export function MessageBubble({
                     setShowMenu(false);
                     onUnsend(message);
                   }}
-                  className="w-full px-3.5 py-2 hover:bg-rose-50 flex items-center gap-2 text-rose-600 transition"
+                  className="w-full px-3.5 py-2 hover:bg-cream-2 flex items-center gap-2 text-crimson transition"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   Unsend
@@ -701,3 +686,21 @@ export function MessageBubble({
     </div>
   );
 }
+
+// Memoize row component (React.memo with custom comparator - Phase 3.2 60fps guarantee)
+export const MessageBubble = React.memo(MessageBubbleComponent, (prev, next) => {
+  return (
+    prev.message.id === next.message.id &&
+    prev.message.created_at === next.message.created_at &&
+    prev.message.type === next.message.type &&
+    prev.message.payload.text === next.message.payload.text &&
+    prev.message.payload.isUnsent === next.message.payload.isUnsent &&
+    prev.message.payload.editedAt === next.message.payload.editedAt &&
+    prev.isMe === next.isMe &&
+    prev.isNew === next.isNew &&
+    prev.isLastInGroup === next.isLastInGroup &&
+    JSON.stringify(prev.message.payload.reactions) === JSON.stringify(next.message.payload.reactions) &&
+    JSON.stringify(prev.message.payload.stickerReactions) === JSON.stringify(next.message.payload.stickerReactions) &&
+    JSON.stringify(prev.message.payload.seenBy) === JSON.stringify(next.message.payload.seenBy)
+  );
+});

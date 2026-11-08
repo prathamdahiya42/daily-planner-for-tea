@@ -25,6 +25,7 @@ import {
 import { APP_CONFIG } from "@/config/app.config";
 import { registerPushSubscription, isIosDevice, isPwaStandalone } from "@/lib/push/client-push";
 import { useRoom } from "@/context/RoomContext";
+import { getStoredTheme, applyTheme, ThemeMode } from "@/lib/theme/theme";
 
 interface RoomSettingsModalProps {
   settings: RoomSettings;
@@ -46,6 +47,7 @@ export function RoomSettingsModal({
   const [isSaved, setIsSaved] = useState(false);
   const [pushStatus, setPushStatus] = useState<"default" | "granted" | "denied">("default");
   const [isEnablingPush, setIsEnablingPush] = useState(false);
+  const [themeMode, setThemeMode] = useState<ThemeMode>(getStoredTheme);
 
   useEffect(() => {
     if (typeof window !== "undefined" && "Notification" in window) {
@@ -384,6 +386,36 @@ export function RoomSettingsModal({
                   </button>
                 ))}
               </div>
+            </div>
+          </div>
+
+          {/* Theme Mode Toggle (Phase 3.4) */}
+          <div>
+            <div className="flex items-center gap-2 mb-1.5 text-slate-800 font-semibold text-xs">
+              <Moon className="w-4 h-4 text-purple-600" />
+              <span>Theme Mode</span>
+            </div>
+            <p className="text-[11px] text-slate-400 mb-3">
+              Choose Blush (Light), Midnight (Dark), or Auto (Midnight at 8 PM).
+            </p>
+            <div className="grid grid-cols-3 gap-2">
+              {(["blush", "midnight", "auto"] as const).map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => {
+                    setThemeMode(mode);
+                    applyTheme(mode);
+                  }}
+                  className={`py-2 px-2 rounded-xl text-xs font-semibold border transition ${
+                    themeMode === mode
+                      ? "bg-purple-600 text-white border-purple-600 shadow-sm"
+                      : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
+                  }`}
+                >
+                  {mode === "blush" ? "Blush (Light)" : mode === "midnight" ? "Midnight (Dark)" : "Auto (8 PM)"}
+                </button>
+              ))}
             </div>
           </div>
 
