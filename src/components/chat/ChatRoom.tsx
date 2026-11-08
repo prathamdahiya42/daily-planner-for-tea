@@ -334,7 +334,7 @@ export function ChatRoom() {
                   {/* Sticky Date Chip */}
                   {showDateChip && (
                     <div className="sticky top-2 z-10 mx-auto my-2.5">
-                      <span className="px-3 py-0.5 rounded-full font-display italic text-[11px] bg-surface/90 border border-blush/70 text-plum-soft shadow-xs backdrop-blur-xs">
+                      <span className="px-3 py-0.5 rounded-full font-display italic text-[11px] bg-surface/95 border border-blush/80 text-plum shadow-xs backdrop-blur-xs">
                         {formatDateChip(msg.created_at)}
                       </span>
                     </div>

@@ -345,6 +345,7 @@ function MessageBubbleComponent({
             className={`flex items-center gap-1 font-hand text-[13px] mt-0.5 px-2 ${
               isMe ? "justify-end text-rose" : "justify-start text-plum-soft"
             }`}
+            style={{ textShadow: "0 1px 2px rgba(0,0,0,0.25)" }}
           >
             {isExpiring && (
               <span title="Disappearing sticker" className="flex items-center text-amber-500">

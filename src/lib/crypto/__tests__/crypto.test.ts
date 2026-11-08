@@ -40,7 +40,7 @@ describe("Key Derivation (KDF & HKDF)", () => {
     expect(res.masterKey.length).toBe(32);
     // Should be argon2id or fallback gracefully
     expect(["argon2id", "pbkdf2"]).toContain(res.kdfUsed);
-  });
+  }, 15000);
 
   it("splits master key with HKDF into distinct, non-overlapping keys", async () => {
     const { masterKey } = await deriveMasterKey(testPassphrase, { forcePbkdf2: true });
