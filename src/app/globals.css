@@ -68,6 +68,26 @@ body {
   background-size: 20px 20px;
 }
 
+.room-chat-pattern-glow {
+  background-color: var(--cream);
+  background-image: radial-gradient(color-mix(in srgb, var(--crimson) 24%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.room-chat-pattern-paper {
+  background-color: var(--cream);
+  background-image: radial-gradient(color-mix(in srgb, var(--plum-soft) 14%, transparent) 0.8px, transparent 0.8px);
+  background-size: 16px 16px;
+}
+
+[data-style="glow"] .glass-chrome {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-style="paper"] {
+  font-feature-settings: "kern", "liga", "clig";
+}
+
 /* Logo float animation (Transform only - 60fps - Phase 1.3) */
 @keyframes logoFloat {
   0%, 100% {
