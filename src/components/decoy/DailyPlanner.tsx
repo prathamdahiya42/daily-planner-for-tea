@@ -128,9 +128,16 @@ export function DailyPlanner({ onTriggerSecret }: { onTriggerSecret: () => void 
     saveTasks(updated);
   };
 
-  // Secret gesture step 1: Tap title 3 times
+  // Secret gesture step 1: Tap title 3 times (or tap again once primed)
   const handleTitleClick = () => {
     if (titleTimerRef.current) clearTimeout(titleTimerRef.current);
+
+    if (isPrimed) {
+      // If already primed, a tap immediately triggers the secret unlock
+      setIsPrimed(false);
+      onTriggerSecret();
+      return;
+    }
 
     const nextCount = titleTapCount + 1;
     if (nextCount >= APP_CONFIG.gesture.titleTapCount) {

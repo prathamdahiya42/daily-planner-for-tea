@@ -83,6 +83,95 @@ body {
   will-change: transform;
 }
 
+/* Ambient petal drift (Transform only - Phase 2) */
+@keyframes petalDrift {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+  }
+  50% {
+    transform: translateY(-50vh) rotate(180deg) translateX(12px) scale(1);
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg) translateX(-12px) scale(0.9);
+  }
+}
+
+.animate-petal-drift {
+  animation: petalDrift linear infinite;
+  will-change: transform;
+}
+
+/* Button shine sweep every 6s (Transform only - Phase 2) */
+@keyframes buttonShine {
+  0%, 75% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(150%);
+  }
+}
+
+.animate-button-shine {
+  animation: buttonShine 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Pulsating crimson ring on logo (Phase 2.1) */
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(209, 46, 83, 0.35);
+  }
+  70%, 100% {
+    box-shadow: 0 0 0 10px rgba(209, 46, 83, 0);
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 2.4s ease-out infinite;
+}
+
+/* Horizontal shake on error (4 keyframes: -6px, +6px, -3px, +3px, 0 in 320ms - Phase 2.4) */
+@keyframes shakeHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-shake-horizontal {
+  animation: shakeHorizontal 320ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Smooth entrance fade & scale-up (Phase 2.1) */
+@keyframes entranceScaleFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-entrance {
+  animation: entranceScaleFade 240ms cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
 /* Text shimmer sweep on load (Phase 2) */
 @keyframes textShimmer {
   0% {
