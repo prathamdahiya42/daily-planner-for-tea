@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { DecryptedMessage } from "@/lib/chat/types";
 import { getStickerById } from "@/lib/stickers/stickers";
+import { resolveSticker } from "@/lib/stickers/resolver";
+import { Sticker } from "./Sticker";
 import { StickerReactionPicker } from "@/components/stickers/StickerReactionPicker";
 import { PhotoLightbox } from "./PhotoLightbox";
 import { useChat } from "@/context/ChatContext";
@@ -231,8 +233,7 @@ function MessageBubbleComponent({
               } flex items-center gap-1 z-10`}
             >
               {Object.entries(payload.stickerReactions || {}).map(([dev, stId]) => {
-                const def = getStickerById(stId);
-                if (!def) return null;
+                const resolved = resolveSticker(stId);
                 return (
                   <div
                     key={dev}
@@ -240,10 +241,10 @@ function MessageBubbleComponent({
                       e.stopPropagation();
                       onToggleStickerReaction?.(message.id, stId);
                     }}
-                    className="w-6 h-6 p-0.5 rounded-full bg-surface border border-blush/80 shadow-sm cursor-pointer active:scale-95 transition"
-                    title={def.name}
+                    className="w-6 h-6 p-0.5 rounded-full bg-surface border border-blush/80 shadow-sm cursor-pointer active:scale-95 transition flex items-center justify-center overflow-hidden"
+                    title={resolved.name}
                   >
-                    <img src={def.file} alt={def.name} className="w-full h-full object-contain" />
+                    <Sticker payload={stId} size="small" />
                   </div>
                 );
               })}
@@ -328,9 +329,7 @@ function MessageBubbleComponent({
   }
 
   // --- STICKER MESSAGE ---
-  if (message.type === "sticker" && payload.stickerId) {
-    const stickerFile = payload.stickerFile || `/stickers/${payload.stickerId}.svg`;
-
+  if (message.type === "sticker" || payload.stickerId || payload.stickerFile) {
     return (
       <div
         className={`message-row relative flex flex-col group ${isLastInGroup ? "mb-2" : "mb-0.5"} ${
@@ -338,18 +337,13 @@ function MessageBubbleComponent({
         } ${isNew ? "animate-message-in" : ""}`}
       >
         <div className="relative select-none" onClick={handleTouchOrClick}>
-          <div className="w-36 h-36 p-1 transition-transform active:scale-95 cursor-pointer flex items-center justify-center">
-            <img
-              src={stickerFile}
-              alt="Sticker"
-              className="w-full h-full object-contain drop-shadow-md"
-              loading="lazy"
-            />
+          <div className="p-1 transition-transform active:scale-95 cursor-pointer flex items-center justify-center">
+            <Sticker payload={payload} />
           </div>
 
           <div
-            className={`flex items-center gap-1 font-hand text-[13px] mt-0.5 px-2 text-plum-soft ${
-              isMe ? "justify-end text-rose" : "justify-start"
+            className={`flex items-center gap-1 font-hand text-[13px] mt-0.5 px-2 ${
+              isMe ? "justify-end text-rose" : "justify-start text-plum-soft"
             }`}
           >
             {isExpiring && (
@@ -404,8 +398,7 @@ function MessageBubbleComponent({
               } flex items-center gap-1 z-10`}
             >
               {Object.entries(payload.stickerReactions || {}).map(([dev, stId]) => {
-                const def = getStickerById(stId);
-                if (!def) return null;
+                const resolved = resolveSticker(stId);
                 return (
                   <div
                     key={dev}
@@ -413,10 +406,10 @@ function MessageBubbleComponent({
                       e.stopPropagation();
                       onToggleStickerReaction?.(message.id, stId);
                     }}
-                    className="w-6 h-6 p-0.5 rounded-full bg-surface border border-blush/80 shadow-sm cursor-pointer active:scale-95 transition"
-                    title={def.name}
+                    className="w-6 h-6 p-0.5 rounded-full bg-surface border border-blush/80 shadow-sm cursor-pointer active:scale-95 transition flex items-center justify-center overflow-hidden"
+                    title={resolved.name}
                   >
-                    <img src={def.file} alt={def.name} className="w-full h-full object-contain" />
+                    <Sticker payload={stId} size="small" />
                   </div>
                 );
               })}
@@ -521,7 +514,11 @@ function MessageBubbleComponent({
                 } shadow-bubble`
           }`}
         >
-          <p className="whitespace-pre-wrap">{payload.text}</p>
+          {payload.text ? (
+            <p className="whitespace-pre-wrap">{payload.text}</p>
+          ) : (
+            <p className="whitespace-pre-wrap italic opacity-70 text-xs">✨</p>
+          )}
 
           {/* Timestamp, Disappearing Timer, Edited & Seen Status */}
           <div

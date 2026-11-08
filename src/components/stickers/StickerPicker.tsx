@@ -12,6 +12,7 @@ import {
   saveRecentStickerId,
   StickerDef,
 } from "@/lib/stickers/stickers";
+import { Sticker } from "@/components/chat/Sticker";
 
 interface StickerPickerProps {
   onSelectSticker: (stickerId: string) => void;
@@ -189,11 +190,9 @@ export function StickerPicker({ onSelectSticker, onClose }: StickerPickerProps) 
               aria-label={sticker.name}
             >
               <div className="w-full h-full flex items-center justify-center overflow-hidden">
-                <img
-                  src={sticker.file}
-                  alt={sticker.name}
-                  className="w-full h-full object-contain group-hover:scale-105 transition-transform"
-                  loading="lazy"
+                <Sticker
+                  payload={sticker}
+                  className="group-hover:scale-105 transition-transform"
                 />
               </div>
               {activeTab !== "captions" && (

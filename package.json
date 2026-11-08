@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "check:stickers": "node scripts/fetch-stickers.mjs --check",
+    "prebuild": "npm run check:stickers",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

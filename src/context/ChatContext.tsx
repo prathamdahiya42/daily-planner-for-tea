@@ -18,6 +18,7 @@ import {
   saveEncryptedSettings,
   getExpiryTimestamp,
 } from "@/lib/settings/room-settings";
+import { resolveSticker } from "@/lib/stickers/resolver";
 import { APP_CONFIG } from "@/config/app.config";
 
 interface ChatContextType {
@@ -320,11 +321,12 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       const messageId = crypto.randomUUID();
       const expiresAt = getExpiryTimestamp(roomSettings.disappearingTimer);
+      const resolved = resolveSticker(stickerId);
 
       const payload: PlaintextMessagePayload = {
         text: "",
-        stickerId,
-        stickerFile: `/stickers/${stickerId}.svg`,
+        stickerId: resolved.id,
+        stickerFile: resolved.file,
         replyTo: replyingTo
           ? {
               id: replyingTo.id,

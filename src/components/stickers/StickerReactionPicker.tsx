@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { getStickerById } from "@/lib/stickers/stickers";
+import { resolveSticker } from "@/lib/stickers/resolver";
+import { Sticker } from "@/components/chat/Sticker";
 
 interface StickerReactionPickerProps {
   onSelectReaction: (stickerId: string) => void;
@@ -29,22 +30,20 @@ export function StickerReactionPicker({ onSelectReaction, onClose }: StickerReac
         className="bg-surface/95 backdrop-blur-md border border-blush rounded-3xl p-3 shadow-2xl flex items-center gap-2 animate-pop-in"
       >
         {QUICK_REACTION_STICKERS.map((id) => {
-          const sticker = getStickerById(id);
-          if (!sticker) return null;
+          const resolved = resolveSticker(id);
           return (
             <button
               key={id}
               onClick={() => {
-                onSelectReaction(id);
+                onSelectReaction(resolved.id);
                 onClose();
               }}
-              className="w-12 h-12 p-1.5 rounded-2xl hover:bg-cream-2 active:scale-110 transition flex items-center justify-center group"
-              title={sticker.name}
+              className="w-12 h-12 p-1 rounded-2xl hover:bg-cream-2 active:scale-110 transition flex items-center justify-center group overflow-hidden"
+              title={resolved.name}
             >
-              <img
-                src={sticker.file}
-                alt={sticker.name}
-                className="w-full h-full object-contain group-hover:scale-110 transition-transform"
+              <Sticker
+                payload={resolved}
+                className="group-hover:scale-110 transition-transform"
               />
             </button>
           );
