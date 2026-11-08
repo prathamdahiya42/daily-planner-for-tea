@@ -3,23 +3,138 @@
 @tailwind utilities;
 
 :root {
-  --background: #f8fafc;
-  --foreground: #1e293b;
+  /* Blush Light Theme (Derived from logo: blush-pink circle, crimson ring, plum-black hoodie, rose mug, white hearts) */
+  --cream: #FDF8F9;
+  --cream-2: #FBE6EC;
+  --blush: #FBC8D4;
+  --peach: #FABBB5;
+  --rose: #E59EA0;
+  --berry: #AB4250;
+  --crimson: #D12E53;
+  --plum: #28131B;
+  --plum-soft: #6B4350;
+  --surface: #FFFFFF;
+  --him: #BFD9F2;
+  --her: #F8B6CC;
+
+  --background: var(--cream);
+  --foreground: var(--plum);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cream: #190B11;
+    --cream-2: #28131B;
+    --surface: #381720;
+    --blush: #5A2336;
+    --peach: #8A4A4F;
+    --rose: #E59EA0;
+    --berry: #F2A3B3;
+    --crimson: #E0426A;
+    --plum: #FBE6EC;
+    --plum-soft: #D9B4C0;
+    --background: var(--cream);
+    --foreground: var(--plum);
+  }
+}
+
+[data-theme="dark"] {
+  --cream: #190B11;
+  --cream-2: #28131B;
+  --surface: #381720;
+  --blush: #5A2336;
+  --peach: #8A4A4F;
+  --rose: #E59EA0;
+  --berry: #F2A3B3;
+  --crimson: #E0426A;
+  --plum: #FBE6EC;
+  --plum-soft: #D9B4C0;
+  --background: var(--cream);
+  --foreground: var(--plum);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: none;
 }
 
-/* Custom scrollbar hiding for clean app feel */
+/* Subtle static dot background pattern at ~4% opacity for chat area (Rule 1.1) */
+.room-chat-pattern {
+  background-color: var(--cream);
+  background-image: radial-gradient(var(--plum-soft) 0.6px, transparent 0.6px);
+  background-size: 20px 20px;
+}
+
+/* Logo float animation (Transform only - 60fps - Phase 1.3) */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-logo-float {
+  animation: logoFloat 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Text shimmer sweep on load (Phase 2) */
+@keyframes textShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--plum) 0%,
+    var(--crimson) 50%,
+    var(--plum) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 1.4s ease-out 1;
+}
+
+/* Custom scrollbars */
 ::-webkit-scrollbar {
-  display: none;
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blush);
+  border-radius: 9999px;
 }
 * {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blush) transparent;
+}
+
+/* Reduced motion guards (Rule 7) */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-logo-float {
+    animation: none !important;
+    transform: none !important;
+  }
+  .shimmer-text {
+    background: none !important;
+    -webkit-text-fill-color: var(--plum) !important;
+    color: var(--plum) !important;
+    animation: none !important;
+  }
 }

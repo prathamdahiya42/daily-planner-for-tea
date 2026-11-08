@@ -332,8 +332,8 @@ export function MessageBubble({
           </div>
 
           <div
-            className={`flex items-center gap-1 text-[10px] mt-0.5 px-2 text-slate-400 ${
-              isMe ? "justify-end" : "justify-start"
+            className={`flex items-center gap-1 font-hand text-[13px] mt-0.5 px-2 text-plum-soft ${
+              isMe ? "justify-end text-rose" : "justify-start"
             }`}
           >
             {isExpiring && (
@@ -539,18 +539,18 @@ export function MessageBubble({
       <div className="relative max-w-[82%] select-none">
         <div
           onClick={handleTouchOrClick}
-          className={`px-4 py-2.5 transition active:scale-[0.99] cursor-pointer break-words text-sm leading-relaxed ${
+          className={`px-4 py-2.5 transition active:scale-[0.99] cursor-pointer break-words text-[16px] leading-[1.45] font-body ${
             isMe
-              ? "bg-rose-500 text-white rounded-3xl rounded-br-sm shadow-soft"
-              : "bg-white border border-rose-100 text-slate-800 rounded-3xl rounded-bl-sm shadow-soft"
+              ? "bg-gradient-to-br from-crimson to-berry text-white rounded-[20px] rounded-br-[6px] shadow-sm"
+              : "bg-surface border border-blush text-plum rounded-[20px] rounded-bl-[6px] shadow-bubble"
           }`}
         >
           <p className="whitespace-pre-wrap">{payload.text}</p>
 
           {/* Timestamp, Disappearing Timer, Edited & Seen Status */}
           <div
-            className={`flex items-center justify-end gap-1.5 text-[10px] mt-1 select-none ${
-              isMe ? "text-rose-100" : "text-slate-400"
+            className={`flex items-center justify-end gap-1.5 font-hand text-[13px] mt-0.5 select-none ${
+              isMe ? "text-rose/90" : "text-plum-soft"
             }`}
           >
             {isExpiring && (
@@ -564,7 +564,7 @@ export function MessageBubble({
             {/* Seen status shown as a small heart */}
             {isMe && isSeenByPartner && (
               <span title="Seen by partner" className="inline-flex items-center ml-0.5">
-                <Heart className="w-2.5 h-2.5 fill-rose-200 text-rose-200" />
+                <Heart className="w-2.5 h-2.5 fill-rose text-rose" />
               </span>
             )}
           </div>

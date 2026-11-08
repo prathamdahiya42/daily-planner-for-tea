@@ -141,7 +141,7 @@ export function ChatInput({
         <button
           type="button"
           onClick={onOpenStickers}
-          className="w-10 h-10 rounded-2xl bg-rose-50 hover:bg-rose-100 active:scale-95 text-rose-500 flex items-center justify-center transition border border-rose-200/50 shrink-0"
+          className="w-10 h-10 rounded-2xl bg-cream-2 hover:bg-blush/50 active:scale-95 text-crimson flex items-center justify-center transition border border-blush/60 shrink-0"
           title="Open Stickers"
           aria-label="Open stickers"
         >
@@ -153,12 +153,12 @@ export function ChatInput({
           type="button"
           onClick={() => fileInputRef.current?.click()}
           disabled={isUploadingPhoto}
-          className="w-10 h-10 rounded-2xl bg-amber-50 hover:bg-amber-100 active:scale-95 text-amber-600 flex items-center justify-center transition border border-amber-200/50 shrink-0 disabled:opacity-50"
+          className="w-10 h-10 rounded-2xl bg-cream-2 hover:bg-blush/50 active:scale-95 text-berry flex items-center justify-center transition border border-blush/60 shrink-0 disabled:opacity-50"
           title="Send Encrypted Photo"
           aria-label="Send photo"
         >
           {isUploadingPhoto ? (
-            <Loader2 className="w-4 h-4 animate-spin text-amber-600" />
+            <Loader2 className="w-4 h-4 animate-spin text-berry" />
           ) : (
             <Camera className="w-4 h-4" />
           )}
@@ -168,7 +168,7 @@ export function ChatInput({
         <button
           type="button"
           onClick={onOpenSignals}
-          className="w-10 h-10 rounded-2xl bg-indigo-50 hover:bg-indigo-100 active:scale-95 text-indigo-500 flex items-center justify-center transition border border-indigo-200/50 shrink-0"
+          className="w-10 h-10 rounded-2xl bg-cream-2 hover:bg-blush/50 active:scale-95 text-rose flex items-center justify-center transition border border-blush/60 shrink-0"
           title="Send Coded Signal"
           aria-label="Coded signals"
         >
@@ -180,14 +180,14 @@ export function ChatInput({
           type="text"
           value={text}
           onChange={handleChange}
-          placeholder="Send a sweet note..."
-          className="flex-1 px-4 py-2.5 text-sm bg-slate-50 border border-slate-200/90 rounded-2xl focus:outline-none focus:ring-2 focus:ring-rose-400/20 focus:border-rose-400 text-slate-800 placeholder-slate-400"
+          placeholder="say something sweet…"
+          className="flex-1 px-4 py-2.5 text-base font-body bg-cream-2 border border-blush/70 rounded-2xl focus:outline-none focus:ring-2 focus:ring-crimson/20 focus:border-crimson text-plum placeholder:font-hand placeholder:text-rose placeholder:text-base"
         />
 
         <button
           type="submit"
           disabled={!text.trim() || isSubmitting}
-          className="w-10 h-10 rounded-2xl bg-rose-500 hover:bg-rose-600 active:scale-95 text-white flex items-center justify-center transition shadow-soft disabled:opacity-40 disabled:scale-100 shrink-0"
+          className="w-10 h-10 rounded-2xl bg-gradient-to-r from-crimson to-berry hover:opacity-95 active:scale-95 text-white flex items-center justify-center transition shadow-soft disabled:opacity-40 disabled:scale-100 shrink-0"
           aria-label="Send message"
         >
           <Send className="w-4 h-4 ml-0.5" />

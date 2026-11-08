@@ -12,6 +12,7 @@ import { CodedSignalDrawer } from "@/components/signals/CodedSignalDrawer";
 import { DecryptedMessage } from "@/lib/chat/types";
 import { BACKGROUND_THEMES } from "@/lib/settings/room-settings";
 import { Sparkles } from "lucide-react";
+import { HeartSteamIcon, SpeechBubbleHeartIcon } from "@/components/ui/BrandMotifs";
 
 export function ChatRoom() {
   const { deviceId, roomId, quickHide } = useRoom();
@@ -116,7 +117,7 @@ export function ChatRoom() {
   return (
     <div
       onClick={handleBackgroundClick}
-      className={`w-full max-w-[420px] mx-auto min-h-screen ${currentTheme.bgClass} flex flex-col font-sans select-none transition-colors duration-500 relative`}
+      className={`w-full max-w-[420px] mx-auto min-h-screen ${currentTheme.bgClass} room-chat-pattern flex flex-col font-body select-none transition-colors duration-500 relative`}
     >
       {/* Top Header */}
       <ChatHeader onOpenSettings={() => setShowSettingsModal(true)} />
@@ -124,18 +125,20 @@ export function ChatRoom() {
       {/* Message Stream */}
       <main className="flex-1 p-4 overflow-y-auto flex flex-col justify-end">
         {isLoadingMessages && messages.length === 0 ? (
-          <div className="flex-1 flex items-center justify-center text-xs text-slate-400 gap-2 py-20">
-            <Sparkles className="w-4 h-4 animate-spin text-rose-400" />
+          <div className="flex-1 flex items-center justify-center text-xs text-plum-soft gap-2 py-20 font-body">
+            <HeartSteamIcon className="w-5 h-5 animate-pulse text-crimson" />
             <span>Decrypting messages...</span>
           </div>
         ) : messages.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center text-center p-6 my-auto">
-            <div className="w-16 h-16 rounded-3xl bg-rose-50 text-rose-500 flex items-center justify-center text-3xl mb-3 shadow-soft">
-              🧸
+            <div className="w-20 h-20 rounded-3xl bg-cream-2 border border-blush/60 flex items-center justify-center mb-4 shadow-soft">
+              <SpeechBubbleHeartIcon className="w-12 h-12" />
             </div>
-            <h3 className="text-sm font-bold text-slate-800">Your Private Space</h3>
-            <p className="text-xs text-slate-400 mt-1 max-w-[220px] leading-relaxed">
-              Every message, photo, sticker, and signal is end-to-end encrypted. Send your first note!
+            <h3 className="text-base font-display font-bold text-plum">
+              Say hi to your favourite person
+            </h3>
+            <p className="text-sm font-hand text-rose mt-1 max-w-[220px] leading-relaxed">
+              our little encrypted corner of the world...
             </p>
           </div>
         ) : (
