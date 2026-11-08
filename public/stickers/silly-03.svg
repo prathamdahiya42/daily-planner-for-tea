@@ -1,0 +1,13 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="180" cy="150" r="40" fill="#E8A598"/><circle cx="320" cy="150" r="40" fill="#E8A598"/>
+  <circle cx="250" cy="230" r="85" fill="#E8A598"/>
+  <ellipse cx="265" cy="345" rx="75" ry="65" fill="#E8A598" transform="rotate(12 265 345)"/>
+  <!-- Motion lines -->
+  <path d="M120 300 Q140 280 120 260" stroke="#FF80AB" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M390 350 Q410 330 390 310" stroke="#FF80AB" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Singing face -->
+  <circle cx="220" cy="210" r="6" fill="#3D2314"/><circle cx="275" cy="205" r="6" fill="#3D2314"/>
+  <ellipse cx="250" cy="245" rx="14" ry="18" fill="#FF4081"/>
+  <!-- Musical notes -->
+  <text x="360" y="180" font-size="36" fill="#FF4081">🎶</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="180" cy="260" r="80" fill="#E8A598"/>
+  <!-- Throwing Arm -->
+  <path d="M190 230 Q250 170 300 180" stroke="#E8A598" stroke-width="22" stroke-linecap="round" fill="none"/>
+  <!-- Paper airplane flying -->
+  <polygon points="320,170 420,130 350,210 350,180" fill="#FFFFFF" stroke="#90A4AE" stroke-width="4"/>
+  <line x1="320" y1="170" x2="350" y2="180" stroke="#90A4AE" stroke-width="3"/>
+  <path d="M390 140 C380 130 370 140 375 145 Z" fill="#FF4081"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="160" cy="220" r="75" fill="#C68B59"/>
+  <circle cx="352" cy="220" r="75" fill="#E8A598"/>
+  <!-- Pinkies entwined in center -->
+  <path d="M210 270 Q256 290 256 260" stroke="#C68B59" stroke-width="22" stroke-linecap="round" fill="none"/>
+  <path d="M302 270 Q256 290 256 260" stroke="#E8A598" stroke-width="20" stroke-linecap="round" fill="none"/>
+  <circle cx="256" cy="245" r="8" fill="#FF4081"/>
+  <text x="256" y="380" font-family="sans-serif" font-weight="bold" font-size="24" fill="#FF4081" text-anchor="middle">Promise won't happen again</text>
+</svg>

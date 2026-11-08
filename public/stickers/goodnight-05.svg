@@ -1,0 +1,10 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="200" cy="250" r="80" fill="#C68B59"/>
+  <!-- Lantern held in paw -->
+  <rect x="290" y="210" width="70" height="110" rx="12" fill="#FFF9C4" stroke="#455A64" stroke-width="8"/>
+  <rect x="280" y="195" width="90" height="20" rx="6" fill="#37474F"/>
+  <rect x="280" y="315" width="90" height="20" rx="6" fill="#37474F"/>
+  <!-- Glowing firefly inside -->
+  <circle cx="325" cy="265" r="16" fill="#FFEB3B"/>
+  <circle cx="325" cy="265" r="8" fill="#FFF59D"/>
+</svg>

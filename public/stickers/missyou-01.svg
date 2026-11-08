@@ -1,0 +1,13 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="200" cy="220" r="85" fill="#C68B59"/>
+  <circle cx="130" cy="140" r="32" fill="#C68B59"/><circle cx="270" cy="140" r="32" fill="#C68B59"/>
+  <!-- Eyes looking down at frame -->
+  <ellipse cx="185" cy="210" rx="6" ry="10" fill="#3D2314"/>
+  <ellipse cx="235" cy="210" rx="6" ry="10" fill="#3D2314"/>
+  <!-- Photo Frame held in paws -->
+  <rect x="260" y="220" width="120" height="150" rx="10" fill="#8D6E63" stroke="#5D4037" stroke-width="8"/>
+  <rect x="275" y="235" width="90" height="120" fill="#FFF0EC"/>
+  <!-- Picture of girl bear inside -->
+  <circle cx="320" cy="285" r="26" fill="#E8A598"/>
+  <circle cx="320" cy="330" r="4" fill="#FF4081"/>
+</svg>

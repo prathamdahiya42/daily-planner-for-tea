@@ -1,0 +1,10 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="330" r="90" fill="#C68B59"/>
+  <!-- Night Sky Backdrop -->
+  <ellipse cx="256" cy="180" rx="140" ry="80" fill="#1A237E" opacity="0.15"/>
+  <!-- Huge shining yellow star -->
+  <polygon points="256,90 268,125 305,125 275,148 286,182 256,160 226,182 237,148 207,125 244,125" fill="#FFD54F"/>
+  <!-- Head tilted up gazing -->
+  <circle cx="230" cy="290" r="8" fill="#3D2314"/><circle cx="282" cy="290" r="8" fill="#3D2314"/>
+  <text x="256" y="440" font-family="sans-serif" font-weight="bold" font-size="20" fill="#3F51B5" text-anchor="middle">Under the same sky</text>
+</svg>

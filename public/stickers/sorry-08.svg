@@ -1,0 +1,10 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="190" cy="230" r="80" fill="#C68B59"/>
+  <circle cx="322" cy="230" r="80" fill="#E8A598"/>
+  <!-- Foreheads touching -->
+  <circle cx="170" cy="210" r="6" fill="#3D2314"/>
+  <circle cx="342" cy="210" r="6" fill="#3D2314"/>
+  <!-- Warm glow in middle -->
+  <circle cx="256" cy="215" r="25" fill="#FFE082" opacity="0.6"/>
+  <path d="M256 160 C246 145, 226 150, 226 165 C226 180, 256 200, 256 205 C256 200, 286 180, 286 165 C286 150, 266 145, 256 160 Z" fill="#FF4081"/>
+</svg>

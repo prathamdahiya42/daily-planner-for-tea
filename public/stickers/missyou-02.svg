@@ -1,0 +1,7 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="160" cy="230" r="75" fill="#C68B59"/>
+  <!-- Paper cup held to ear -->
+  <polygon points="210,190 260,175 260,245 210,230" fill="#FF7043"/>
+  <line x1="260" y1="210" x2="420" y2="210" stroke="#B0BEC5" stroke-width="4" stroke-dasharray="6 6"/>
+  <text x="340" y="190" font-family="sans-serif" font-weight="bold" font-size="20" fill="#FF7043">CAN YOU HEAR ME?</text>
+</svg>

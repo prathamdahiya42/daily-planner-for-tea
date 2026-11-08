@@ -1,0 +1,322 @@
+[
+  {
+    "id": "sweet-01",
+    "name": "Bear Hug",
+    "file": "/stickers/sweet-01.svg",
+    "mood": "sweet",
+    "animated": false,
+    "description": "Boy and girl bear hugging with hearts"
+  },
+  {
+    "id": "sweet-02",
+    "name": "Flower for You",
+    "file": "/stickers/sweet-02.svg",
+    "mood": "sweet",
+    "animated": false,
+    "description": "Boy bear presenting a red rose"
+  },
+  {
+    "id": "sweet-03",
+    "name": "Blowing Kisses",
+    "file": "/stickers/sweet-03.svg",
+    "mood": "sweet",
+    "animated": false,
+    "description": "Girl bear blowing sweet kiss hearts"
+  },
+  {
+    "id": "sweet-04",
+    "name": "Holding Paws",
+    "file": "/stickers/sweet-04.svg",
+    "mood": "sweet",
+    "animated": false,
+    "description": "Bears holding paws under gentle glow"
+  },
+  {
+    "id": "sweet-05",
+    "name": "Honey Share",
+    "file": "/stickers/sweet-05.svg",
+    "mood": "sweet",
+    "animated": false,
+    "description": "Sharing a jar of golden honey"
+  },
+  {
+    "id": "sweet-06",
+    "name": "Shoulder Ride",
+    "file": "/stickers/sweet-06.svg",
+    "mood": "sweet",
+    "animated": false,
+    "description": "Girl bear on boy bear's shoulders"
+  },
+  {
+    "id": "sweet-07",
+    "name": "Cozy Scarf",
+    "file": "/stickers/sweet-07.svg",
+    "mood": "sweet",
+    "animated": false,
+    "description": "Wrapped together in a warm red scarf"
+  },
+  {
+    "id": "sweet-08",
+    "name": "Eskimo Kiss",
+    "file": "/stickers/sweet-08.svg",
+    "mood": "sweet",
+    "animated": false,
+    "description": "Bears touching noses gently"
+  },
+  {
+    "id": "silly-01",
+    "name": "Tongue Out",
+    "file": "/stickers/silly-01.svg",
+    "mood": "silly",
+    "animated": false,
+    "description": "Sticking tongue out playfully"
+  },
+  {
+    "id": "silly-02",
+    "name": "Pot on Head",
+    "file": "/stickers/silly-02.svg",
+    "mood": "silly",
+    "animated": false,
+    "description": "Boy bear with honey pot stuck on head"
+  },
+  {
+    "id": "silly-03",
+    "name": "Wiggle Dance",
+    "file": "/stickers/silly-03.svg",
+    "mood": "silly",
+    "animated": false,
+    "description": "Girl bear doing a happy wiggle dance"
+  },
+  {
+    "id": "silly-04",
+    "name": "Cool Shades",
+    "file": "/stickers/silly-04.svg",
+    "mood": "silly",
+    "animated": false,
+    "description": "Bears wearing oversized cool sunglasses"
+  },
+  {
+    "id": "silly-05",
+    "name": "Tickle Monster",
+    "file": "/stickers/silly-05.svg",
+    "mood": "silly",
+    "animated": false,
+    "description": "Boy bear tickling girl bear giggling"
+  },
+  {
+    "id": "silly-06",
+    "name": "Apple Balance",
+    "file": "/stickers/silly-06.svg",
+    "mood": "silly",
+    "animated": false,
+    "description": "Balancing an apple on bear head"
+  },
+  {
+    "id": "silly-07",
+    "name": "Box Pop",
+    "file": "/stickers/silly-07.svg",
+    "mood": "silly",
+    "animated": false,
+    "description": "Popping out of a cardboard box"
+  },
+  {
+    "id": "silly-08",
+    "name": "Secret Handshake",
+    "file": "/stickers/silly-08.svg",
+    "mood": "silly",
+    "animated": false,
+    "description": "Bears doing a secret funny handshake"
+  },
+  {
+    "id": "sorry-01",
+    "name": "Puppy Eyes",
+    "file": "/stickers/sorry-01.svg",
+    "mood": "sorry",
+    "animated": false,
+    "description": "Droopy ears and sad big eyes"
+  },
+  {
+    "id": "sorry-02",
+    "name": "Band-aid Heart",
+    "file": "/stickers/sorry-02.svg",
+    "mood": "sorry",
+    "animated": false,
+    "description": "Offering a band-aid with mended heart"
+  },
+  {
+    "id": "sorry-03",
+    "name": "Hiding Face",
+    "file": "/stickers/sorry-03.svg",
+    "mood": "sorry",
+    "animated": false,
+    "description": "Paws covering face peeking out"
+  },
+  {
+    "id": "sorry-04",
+    "name": "Single Daisy",
+    "file": "/stickers/sorry-04.svg",
+    "mood": "sorry",
+    "animated": false,
+    "description": "Head bowed with a single gentle flower"
+  },
+  {
+    "id": "sorry-05",
+    "name": "Pinky Promise",
+    "file": "/stickers/sorry-05.svg",
+    "mood": "sorry",
+    "animated": false,
+    "description": "Pinky fingers locked together in promise"
+  },
+  {
+    "id": "sorry-06",
+    "name": "Gentle Pat",
+    "file": "/stickers/sorry-06.svg",
+    "mood": "sorry",
+    "animated": false,
+    "description": "Comforting gentle pat on partner's head"
+  },
+  {
+    "id": "sorry-07",
+    "name": "Rain Umbrella",
+    "file": "/stickers/sorry-07.svg",
+    "mood": "sorry",
+    "animated": false,
+    "description": "Holding umbrella over sad partner in rain"
+  },
+  {
+    "id": "sorry-08",
+    "name": "Forehead Nuzzle",
+    "file": "/stickers/sorry-08.svg",
+    "mood": "sorry",
+    "animated": false,
+    "description": "Gentle forehead reconciliation"
+  },
+  {
+    "id": "missyou-01",
+    "name": "Photo Frame",
+    "file": "/stickers/missyou-01.svg",
+    "mood": "missyou",
+    "animated": false,
+    "description": "Looking at a framed photo of partner"
+  },
+  {
+    "id": "missyou-02",
+    "name": "Cup Telephone",
+    "file": "/stickers/missyou-02.svg",
+    "mood": "missyou",
+    "animated": false,
+    "description": "Speaking into paper cup string telephone"
+  },
+  {
+    "id": "missyou-03",
+    "name": "Pillow Hug",
+    "file": "/stickers/missyou-03.svg",
+    "mood": "missyou",
+    "animated": false,
+    "description": "Hugging partner's pillow tightly"
+  },
+  {
+    "id": "missyou-04",
+    "name": "Window Rain",
+    "file": "/stickers/missyou-04.svg",
+    "mood": "missyou",
+    "animated": false,
+    "description": "Looking out rain streaked window"
+  },
+  {
+    "id": "missyou-05",
+    "name": "Counting Days",
+    "file": "/stickers/missyou-05.svg",
+    "mood": "missyou",
+    "animated": false,
+    "description": "Marking X on calendar with red marker"
+  },
+  {
+    "id": "missyou-06",
+    "name": "Paper Plane",
+    "file": "/stickers/missyou-06.svg",
+    "mood": "missyou",
+    "animated": false,
+    "description": "Sending a paper airplane with love note"
+  },
+  {
+    "id": "missyou-07",
+    "name": "Same Star",
+    "file": "/stickers/missyou-07.svg",
+    "mood": "missyou",
+    "animated": false,
+    "description": "Gazing at the same star tonight"
+  },
+  {
+    "id": "missyou-08",
+    "name": "Dreaming Sigh",
+    "file": "/stickers/missyou-08.svg",
+    "mood": "missyou",
+    "animated": false,
+    "description": "Bear sighing with partner thought bubble"
+  },
+  {
+    "id": "goodnight-01",
+    "name": "Tucked In",
+    "file": "/stickers/goodnight-01.svg",
+    "mood": "goodnight",
+    "animated": false,
+    "description": "Tucked in bed under starry quilt fast asleep"
+  },
+  {
+    "id": "goodnight-02",
+    "name": "Forehead Kiss",
+    "file": "/stickers/goodnight-02.svg",
+    "mood": "goodnight",
+    "animated": false,
+    "description": "Goodnight kiss on forehead before sleep"
+  },
+  {
+    "id": "goodnight-03",
+    "name": "Moon Hug",
+    "file": "/stickers/goodnight-03.svg",
+    "mood": "goodnight",
+    "animated": false,
+    "description": "Hugging a smiling yellow crescent moon"
+  },
+  {
+    "id": "goodnight-04",
+    "name": "Cloud Snooze",
+    "file": "/stickers/goodnight-04.svg",
+    "mood": "goodnight",
+    "animated": false,
+    "description": "Sleeping on a fluffy night cloud"
+  },
+  {
+    "id": "goodnight-05",
+    "name": "Firefly Lantern",
+    "file": "/stickers/goodnight-05.svg",
+    "mood": "goodnight",
+    "animated": false,
+    "description": "Night lantern with glowing fireflies"
+  },
+  {
+    "id": "goodnight-06",
+    "name": "Pyjama Yawn",
+    "file": "/stickers/goodnight-06.svg",
+    "mood": "goodnight",
+    "animated": false,
+    "description": "Yawning in striped pyjamas holding teddy"
+  },
+  {
+    "id": "goodnight-07",
+    "name": "Counting Sheep",
+    "file": "/stickers/goodnight-07.svg",
+    "mood": "goodnight",
+    "animated": false,
+    "description": "Watching tiny fluffy sheep jump"
+  },
+  {
+    "id": "goodnight-08",
+    "name": "Sweet Dreams",
+    "file": "/stickers/goodnight-08.svg",
+    "mood": "goodnight",
+    "animated": false,
+    "description": "Dream bubble showing the two bears together"
+  }
+]

@@ -1,0 +1,9 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bear sleeping -->
+  <circle cx="256" cy="220" r="70" fill="#E8A598"/>
+  <circle cx="195" cy="165" r="25" fill="#E8A598"/><circle cx="317" cy="165" r="25" fill="#E8A598"/>
+  <path d="M230 215 Q240 225 250 215" stroke="#3D2314" stroke-width="4" fill="none"/>
+  <path d="M265 215 Q275 225 285 215" stroke="#3D2314" stroke-width="4" fill="none"/>
+  <!-- Fluffy Cloud -->
+  <path d="M170 330 C140 330 120 300 140 270 C140 240 180 230 200 250 C220 220 280 220 300 250 C330 230 370 250 370 280 C390 300 380 330 350 330 Z" fill="#EDE7F6" stroke="#D1C4E9" stroke-width="6"/>
+</svg>

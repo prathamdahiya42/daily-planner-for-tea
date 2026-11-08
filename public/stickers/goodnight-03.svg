@@ -1,0 +1,10 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Crescent Moon -->
+  <path d="M256 100 C340 100 400 170 400 256 C400 342 340 412 256 412 C290 370 310 320 310 256 C310 192 290 142 256 100 Z" fill="#FDD835"/>
+  <!-- Bear holding onto the moon -->
+  <circle cx="240" cy="250" r="70" fill="#C68B59"/>
+  <circle cx="180" cy="190" r="26" fill="#C68B59"/>
+  <path d="M220 280 Q280 260 290 300" stroke="#C68B59" stroke-width="20" stroke-linecap="round" fill="none"/>
+  <path d="M220 240 Q230 250 240 240" stroke="#3D2314" stroke-width="4" fill="none"/>
+  <text x="180" y="380" font-family="sans-serif" font-weight="bold" font-size="24" fill="#FBC02D">SWEET DREAMS</text>
+</svg>

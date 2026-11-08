@@ -1,0 +1,13 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="270" r="95" fill="#C68B59"/>
+  <circle cx="170" cy="180" r="38" fill="#C68B59"/><circle cx="342" cy="180" r="38" fill="#C68B59"/>
+  <!-- Concentrating eyes looking up -->
+  <ellipse cx="220" cy="235" rx="8" ry="12" fill="#3D2314"/>
+  <ellipse cx="292" cy="235" rx="8" ry="12" fill="#3D2314"/>
+  <!-- Red apple on head -->
+  <circle cx="256" cy="135" r="40" fill="#E53935"/>
+  <path d="M256 95 Q265 75 275 80" stroke="#795548" stroke-width="5" fill="none"/>
+  <ellipse cx="268" cy="85" rx="10" ry="6" fill="#4CAF50" transform="rotate(-20 268 85)"/>
+  <!-- Sweat drop -->
+  <path d="M330 220 Q335 235 325 240 Q315 235 320 220 Z" fill="#29B6F6"/>
+</svg>

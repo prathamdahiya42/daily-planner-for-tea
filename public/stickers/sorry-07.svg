@@ -1,0 +1,11 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Umbrella -->
+  <path d="M160 170 Q256 90 352 170 Z" fill="#29B6F6"/>
+  <line x1="256" y1="170" x2="256" y2="280" stroke="#37474F" stroke-width="8"/>
+  <!-- Two bears huddled underneath -->
+  <circle cx="215" cy="280" r="55" fill="#C68B59"/>
+  <circle cx="297" cy="280" r="52" fill="#E8A598"/>
+  <!-- Raindrops outside -->
+  <line x1="120" y1="180" x2="110" y2="210" stroke="#90CAF9" stroke-width="4" stroke-linecap="round"/>
+  <line x1="390" y1="180" x2="380" y2="210" stroke="#90CAF9" stroke-width="4" stroke-linecap="round"/>
+</svg>

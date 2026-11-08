@@ -1,0 +1,15 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="160" cy="210" r="80" fill="#C68B59"/>
+  <circle cx="352" cy="210" r="75" fill="#E8A598"/>
+  <circle cx="110" cy="140" r="30" fill="#C68B59"/>
+  <circle cx="395" cy="145" r="30" fill="#E8A598"/>
+  <!-- Paws Joined in Middle -->
+  <circle cx="256" cy="340" r="35" fill="#C68B59"/>
+  <circle cx="256" cy="340" r="28" fill="#E8A598"/>
+  <path d="M256 315 C246 300, 226 305, 226 320 C226 335, 256 355, 256 360 C256 355, 286 335, 286 320 C286 305, 266 300, 256 315 Z" fill="#FF4081"/>
+  <!-- Faces looking at each other -->
+  <circle cx="180" cy="205" r="6" fill="#3D2314"/>
+  <circle cx="332" cy="205" r="6" fill="#3D2314"/>
+  <circle cx="190" cy="225" r="10" fill="#FF8A80" opacity="0.6"/>
+  <circle cx="320" cy="225" r="10" fill="#FF8A80" opacity="0.6"/>
+</svg>

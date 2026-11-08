@@ -1,0 +1,15 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="170" cy="240" r="85" fill="#C68B59"/>
+  <circle cx="342" cy="240" r="85" fill="#E8A598"/>
+  <!-- Noses touching in center -->
+  <ellipse cx="250" cy="250" rx="12" ry="10" fill="#3D2314"/>
+  <ellipse cx="262" cy="250" rx="12" ry="10" fill="#3D2314"/>
+  <!-- Happy closed eyes -->
+  <path d="M160 215 Q175 200 190 215" stroke="#3D2314" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M322 215 Q337 200 352 215" stroke="#3D2314" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <circle cx="150" cy="245" r="14" fill="#FF8A80" opacity="0.6"/>
+  <circle cx="362" cy="245" r="14" fill="#FF8A80" opacity="0.6"/>
+  <!-- Sparkles -->
+  <circle cx="256" cy="170" r="10" fill="#FFD700"/>
+  <circle cx="256" cy="130" r="5" fill="#FFD700"/>
+</svg>

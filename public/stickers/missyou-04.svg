@@ -1,0 +1,11 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Window frame -->
+  <rect x="140" y="120" width="232" height="260" rx="12" fill="#E0F7FA" stroke="#78909C" stroke-width="12"/>
+  <line x1="256" y1="120" x2="256" y2="380" stroke="#78909C" stroke-width="8"/>
+  <line x1="140" y1="250" x2="372" y2="250" stroke="#78909C" stroke-width="8"/>
+  <!-- Bear silhouette inside looking out -->
+  <circle cx="220" cy="270" r="45" fill="#C68B59"/>
+  <circle cx="190" cy="225" r="18" fill="#C68B59"/>
+  <!-- Drawn heart on steamed glass -->
+  <path d="M310 180 Q300 170 290 180 Q280 190 310 210 Q340 190 330 180 Z" stroke="#FF4081" stroke-width="4" fill="none"/>
+</svg>

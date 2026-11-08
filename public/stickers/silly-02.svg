@@ -1,0 +1,14 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="270" r="95" fill="#C68B59"/>
+  <!-- Inverted Pot on head -->
+  <ellipse cx="256" cy="160" rx="80" ry="70" fill="#FFA000"/>
+  <ellipse cx="256" cy="220" rx="70" ry="18" fill="#FF8F00"/>
+  <!-- Drips over face -->
+  <path d="M210 220 Q215 250 220 230" stroke="#FFD54F" stroke-width="8" stroke-linecap="round"/>
+  <path d="M280 220 Q290 260 295 240" stroke="#FFD54F" stroke-width="10" stroke-linecap="round"/>
+  <!-- Confused Cross-eyed -->
+  <circle cx="225" cy="270" r="7" fill="#3D2314"/>
+  <circle cx="275" cy="270" r="7" fill="#3D2314"/>
+  <circle cx="256" cy="295" r="8" fill="#3D2314"/>
+  <path d="M245 320 Q256 310 267 320" stroke="#3D2314" stroke-width="4" fill="none"/>
+</svg>

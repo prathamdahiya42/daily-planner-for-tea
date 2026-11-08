@@ -1,0 +1,18 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Droopy ears -->
+  <ellipse cx="160" cy="190" rx="35" ry="48" fill="#C68B59"/>
+  <ellipse cx="352" cy="190" rx="35" ry="48" fill="#C68B59"/>
+  <circle cx="256" cy="240" r="100" fill="#C68B59"/>
+  <!-- Huge glossy eyes -->
+  <circle cx="210" cy="215" r="22" fill="#3D2314"/>
+  <circle cx="203" cy="208" r="8" fill="#FFFFFF"/>
+  <circle cx="302" cy="215" r="22" fill="#3D2314"/>
+  <circle cx="295" cy="208" r="8" fill="#FFFFFF"/>
+  <!-- Sad quivering mouth -->
+  <path d="M236 280 Q256 265 276 280" stroke="#3D2314" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Teardrop -->
+  <path d="M210 245 Q215 260 205 265 Q195 260 200 245 Z" fill="#29B6F6"/>
+  <!-- Holding Sorry sign -->
+  <rect x="176" y="340" width="160" height="60" rx="12" fill="#FFFFFF" stroke="#C68B59" stroke-width="4"/>
+  <text x="256" y="378" font-family="sans-serif" font-weight="bold" font-size="24" fill="#D32F2F" text-anchor="middle">I'M SORRY</text>
+</svg>

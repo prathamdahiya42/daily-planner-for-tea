@@ -1,0 +1,11 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="220" cy="250" r="80" fill="#C68B59"/>
+  <circle cx="330" cy="240" r="75" fill="#E8A598"/>
+  <!-- Squinting laughing eyes -->
+  <path d="M300 220 L315 230 L300 240" stroke="#3D2314" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M350 220 L335 230 L350 240" stroke="#3D2314" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Tickling paws -->
+  <circle cx="280" cy="280" r="22" fill="#C68B59"/>
+  <circle cx="270" cy="250" r="20" fill="#C68B59"/>
+  <text x="340" y="160" font-family="sans-serif" font-weight="bold" font-size="28" fill="#FF4081">HEHEHE!</text>
+</svg>

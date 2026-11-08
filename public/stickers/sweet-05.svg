@@ -1,0 +1,15 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="190" r="90" fill="#C68B59"/>
+  <circle cx="190" cy="115" r="35" fill="#C68B59"/><circle cx="322" cy="115" r="35" fill="#C68B59"/>
+  <ellipse cx="256" cy="200" rx="35" ry="25" fill="#FCEBD9"/>
+  <circle cx="256" cy="192" r="8" fill="#3D2314"/>
+  <circle cx="225" cy="165" r="7" fill="#3D2314"/><circle cx="287" cy="165" r="7" fill="#3D2314"/>
+  <!-- Honey Pot -->
+  <ellipse cx="256" cy="380" rx="80" ry="75" fill="#FFB300"/>
+  <ellipse cx="256" cy="315" rx="55" ry="15" fill="#FFA000"/>
+  <rect x="206" y="360" width="100" height="40" rx="8" fill="#FFF8E1"/>
+  <text x="256" y="386" font-family="sans-serif" font-weight="bold" font-size="20" fill="#FF8F00" text-anchor="middle">HONEY</text>
+  <!-- Dripping honey spoon -->
+  <path d="M256 270 L256 320" stroke="#FFD54F" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="256" cy="330" r="10" fill="#FFD54F"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="240" r="100" fill="#E8A598"/>
+  <circle cx="170" cy="150" r="40" fill="#E8A598"/><circle cx="342" cy="150" r="40" fill="#E8A598"/>
+  <!-- Paws covering face -->
+  <circle cx="205" cy="240" r="45" fill="#E8A598" stroke="#D87A68" stroke-width="4"/>
+  <circle cx="307" cy="240" r="45" fill="#E8A598" stroke="#D87A68" stroke-width="4"/>
+  <!-- Eyes peeking between paws -->
+  <circle cx="230" cy="215" r="8" fill="#3D2314"/>
+  <circle cx="282" cy="215" r="8" fill="#3D2314"/>
+  <text x="256" y="360" font-family="sans-serif" font-weight="bold" font-size="22" fill="#D87A68" text-anchor="middle">Forgive me please?</text>
+</svg>

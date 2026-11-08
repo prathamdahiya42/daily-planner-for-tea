@@ -1,0 +1,11 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="180" cy="290" r="70" fill="#E8A598"/>
+  <!-- Sleepy eyes looking right -->
+  <path d="M165 275 Q180 285 195 275" stroke="#3D2314" stroke-width="4" fill="none"/>
+  <!-- Jumping Sheep -->
+  <ellipse cx="330" cy="190" rx="35" ry="25" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="4"/>
+  <circle cx="300" cy="180" r="14" fill="#37474F"/>
+  <line x1="315" y1="210" x2="310" y2="235" stroke="#37474F" stroke-width="4"/>
+  <line x1="345" y1="210" x2="350" y2="235" stroke="#37474F" stroke-width="4"/>
+  <text x="375" y="170" font-family="sans-serif" font-weight="bold" font-size="24" fill="#78909C">#1</text>
+</svg>

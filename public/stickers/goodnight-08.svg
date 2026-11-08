@@ -1,0 +1,9 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="210" cy="320" r="75" fill="#C68B59"/>
+  <!-- Big dream cloud with both bears -->
+  <ellipse cx="310" cy="150" rx="110" ry="75" fill="#FFF9C4" stroke="#FFE082" stroke-width="6"/>
+  <!-- Bears hugging in dream -->
+  <circle cx="280" cy="150" r="26" fill="#C68B59"/><circle cx="335" cy="150" r="24" fill="#E8A598"/>
+  <circle cx="310" cy="130" r="8" fill="#FF4081"/>
+  <text x="310" y="200" font-family="sans-serif" font-weight="bold" font-size="14" fill="#FF8F00" text-anchor="middle">SEE YOU IN MY DREAMS</text>
+</svg>

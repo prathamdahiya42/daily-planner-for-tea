@@ -1,0 +1,19 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="170" cy="160" r="42" fill="#E8A598"/><circle cx="170" cy="160" r="22" fill="#FFE2DC"/>
+  <circle cx="320" cy="160" r="42" fill="#E8A598"/><circle cx="320" cy="160" r="22" fill="#FFE2DC"/>
+  <ellipse cx="245" cy="250" rx="95" ry="85" fill="#E8A598"/>
+  <path d="M310 150 C290 130, 290 170, 310 150 Z M310 150 C330 130, 330 170, 310 150 Z" fill="#FF4081"/>
+  <!-- Wink and Kiss Mouth -->
+  <path d="M195 220 Q205 210 215 220" stroke="#3D2314" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <circle cx="275" cy="215" r="8" fill="#3D2314"/>
+  <ellipse cx="245" cy="255" rx="35" ry="24" fill="#FFF0EC"/>
+  <!-- Kiss mouth -->
+  <circle cx="245" cy="250" r="6" fill="#3D2314"/>
+  <circle cx="245" cy="264" r="8" fill="#FF4081"/>
+  <circle cx="190" cy="245" r="14" fill="#FF8A80" opacity="0.6"/>
+  <circle cx="295" cy="245" r="14" fill="#FF8A80" opacity="0.6"/>
+  <!-- Floating trail of hearts -->
+  <path d="M320 230 C310 215, 290 220, 290 235 C290 250, 320 270, 320 275 C320 270, 350 250, 350 235 C350 220, 330 215, 320 230 Z" fill="#FF4081"/>
+  <path d="M375 190 C368 175, 350 180, 350 195 C350 210, 375 225, 375 230 C375 225, 400 210, 400 195 C400 180, 382 175, 375 190 Z" fill="#FF80AB"/>
+  <path d="M420 150 C415 140, 400 145, 400 155 C400 165, 420 175, 420 180 C420 175, 440 165, 440 155 C440 145, 425 140, 420 150 Z" fill="#FFA4D4"/>
+</svg>

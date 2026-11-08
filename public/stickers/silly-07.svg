@@ -1,0 +1,12 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bear head popping out -->
+  <circle cx="256" cy="200" r="75" fill="#E8A598"/>
+  <circle cx="195" cy="135" r="30" fill="#E8A598"/><circle cx="317" cy="135" r="30" fill="#E8A598"/>
+  <circle cx="230" cy="185" r="8" fill="#3D2314"/><circle cx="282" cy="185" r="8" fill="#3D2314"/>
+  <ellipse cx="256" cy="215" rx="16" ry="12" fill="#FF4081"/>
+  <!-- Cardboard Box -->
+  <rect x="156" y="250" width="200" height="150" fill="#BCAAA4"/>
+  <path d="M156 250 L120 210 L176 250 Z" fill="#A1887F"/>
+  <path d="M356 250 L392 210 L336 250 Z" fill="#A1887F"/>
+  <text x="256" y="340" font-family="sans-serif" font-weight="bold" font-size="24" fill="#5D4037" text-anchor="middle">PEEK-A-BOO!</text>
+</svg>

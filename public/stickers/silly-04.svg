@@ -1,0 +1,13 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="240" r="105" fill="#C68B59"/>
+  <circle cx="170" cy="140" r="40" fill="#C68B59"/><circle cx="342" cy="140" r="40" fill="#C68B59"/>
+  <!-- Cool Black Sunglasses -->
+  <rect x="170" y="195" width="75" height="55" rx="14" fill="#212121"/>
+  <rect x="267" y="195" width="75" height="55" rx="14" fill="#212121"/>
+  <rect x="240" y="210" width="30" height="8" fill="#212121"/>
+  <!-- Glasses Glare -->
+  <line x1="180" y1="235" x2="205" y2="205" stroke="#FFFFFF" stroke-width="4" opacity="0.7"/>
+  <line x1="277" y1="235" x2="302" y2="205" stroke="#FFFFFF" stroke-width="4" opacity="0.7"/>
+  <!-- Smirk -->
+  <path d="M245 285 Q265 295 280 275" stroke="#3D2314" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>

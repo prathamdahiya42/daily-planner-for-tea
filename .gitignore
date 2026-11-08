@@ -1,0 +1,65 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Next.js build output
+/.next/
+/out/
+
+# Production build
+/build
+
+# Serwist / Service Worker generated files
+/public/sw.js
+/public/sw.js.map
+/public/swe-worker*
+
+# Environment files & secrets (DO NOT COMMIT SECRETS)
+.env*.local
+.env
+.env.production
+.env.staging
+!.env.example
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing & coverage
+/coverage
+.vitest/
+
+# Vercel
+.vercel
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

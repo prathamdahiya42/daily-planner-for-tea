@@ -1,0 +1,11 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="150" cy="200" r="65" fill="#C68B59"/>
+  <circle cx="362" cy="200" r="65" fill="#E8A598"/>
+  <!-- High Five Explosion in Center -->
+  <circle cx="256" cy="260" r="30" fill="#FFEB3B"/>
+  <polygon points="256,190 270,240 320,240 280,270 295,320 256,290 217,320 232,270 192,240 242,240" fill="#FFA000"/>
+  <!-- Paws clamping -->
+  <rect x="180" y="245" width="60" height="30" rx="15" fill="#C68B59"/>
+  <rect x="272" y="245" width="60" height="30" rx="15" fill="#E8A598"/>
+  <text x="256" y="390" font-family="sans-serif" font-weight="bold" font-size="32" fill="#FF6D00" text-anchor="middle">TEAM US!</text>
+</svg>

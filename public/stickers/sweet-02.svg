@@ -1,0 +1,18 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="180" cy="140" r="45" fill="#C68B59"/><circle cx="180" cy="140" r="25" fill="#FAD0C4"/>
+  <circle cx="332" cy="140" r="45" fill="#C68B59"/><circle cx="332" cy="140" r="25" fill="#FAD0C4"/>
+  <ellipse cx="256" cy="240" rx="100" ry="90" fill="#C68B59"/>
+  <ellipse cx="256" cy="250" rx="45" ry="32" fill="#FCEBD9"/>
+  <ellipse cx="256" cy="240" rx="12" ry="8" fill="#3D2314"/>
+  <circle cx="215" cy="205" r="8" fill="#3D2314"/><circle cx="297" cy="205" r="8" fill="#3D2314"/>
+  <circle cx="195" cy="225" r="14" fill="#FF8A80" opacity="0.6"/><circle cx="317" cy="225" r="14" fill="#FF8A80" opacity="0.6"/>
+  <!-- Body & Paws holding rose -->
+  <ellipse cx="256" cy="380" rx="85" ry="90" fill="#C68B59"/>
+  <circle cx="200" cy="340" r="24" fill="#C68B59"/><circle cx="312" cy="340" r="24" fill="#C68B59"/>
+  <!-- Red Rose -->
+  <path d="M256 340 L256 280" stroke="#4CAF50" stroke-width="8" stroke-linecap="round"/>
+  <path d="M256 310 Q280 300 280 290" stroke="#4CAF50" stroke-width="6" fill="none"/>
+  <circle cx="256" cy="265" r="26" fill="#F44336"/>
+  <circle cx="256" cy="265" r="16" fill="#D32F2F"/>
+  <circle cx="256" cy="265" r="8" fill="#B71C1C"/>
+</svg>

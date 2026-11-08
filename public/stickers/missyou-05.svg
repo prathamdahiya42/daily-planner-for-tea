@@ -1,0 +1,12 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Calendar -->
+  <rect x="180" y="140" width="200" height="230" rx="16" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="6"/>
+  <rect x="180" y="140" width="200" height="50" rx="8" fill="#E53935"/>
+  <text x="280" y="175" font-family="sans-serif" font-weight="bold" font-size="22" fill="#FFFFFF" text-anchor="middle">DAYS UNTIL</text>
+  <!-- Grid with big red heart on 14th -->
+  <circle cx="280" cy="270" r="35" fill="#FFEBEE"/>
+  <text x="280" y="280" font-family="sans-serif" font-weight="bold" font-size="28" fill="#D32F2F" text-anchor="middle">SOON</text>
+  <!-- Bear paw marking calendar -->
+  <circle cx="160" cy="300" r="45" fill="#C68B59"/>
+  <line x1="160" y1="300" x2="230" y2="270" stroke="#E53935" stroke-width="10" stroke-linecap="round"/>
+</svg>

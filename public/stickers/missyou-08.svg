@@ -1,0 +1,12 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="190" cy="290" r="80" fill="#C68B59"/>
+  <ellipse cx="190" cy="305" rx="30" ry="20" fill="#FCEBD9"/>
+  <circle cx="190" cy="295" r="7" fill="#3D2314"/>
+  <!-- Dream bubble -->
+  <circle cx="270" cy="200" r="12" fill="#E0F7FA"/>
+  <circle cx="300" cy="170" r="18" fill="#E0F7FA"/>
+  <ellipse cx="360" cy="120" rx="60" ry="45" fill="#E0F7FA" stroke="#80DEEA" stroke-width="4"/>
+  <!-- Partner face in dream -->
+  <circle cx="360" cy="120" r="25" fill="#E8A598"/>
+  <circle cx="360" cy="110" r="3" fill="#FF4081"/>
+</svg>

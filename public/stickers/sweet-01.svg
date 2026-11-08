@@ -1,0 +1,31 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Boy Bear Body & Ears -->
+  <circle cx="160" cy="180" r="45" fill="#C68B59"/><circle cx="160" cy="180" r="25" fill="#FAD0C4"/>
+  <circle cx="280" cy="170" r="45" fill="#C68B59"/><circle cx="280" cy="170" r="25" fill="#FAD0C4"/>
+  <ellipse cx="210" cy="270" rx="90" ry="85" fill="#C68B59"/>
+  <!-- Girl Bear Body & Ears -->
+  <circle cx="250" cy="175" r="45" fill="#E8A598"/><circle cx="250" cy="175" r="25" fill="#FFE2DC"/>
+  <circle cx="370" cy="185" r="45" fill="#E8A598"/><circle cx="370" cy="185" r="25" fill="#FFE2DC"/>
+  <ellipse cx="310" cy="275" rx="85" ry="80" fill="#E8A598"/>
+  <!-- Girl Bear Bow -->
+  <path d="M260 170 C240 150, 240 190, 260 170 Z M260 170 C280 150, 280 190, 260 170 Z" fill="#FF5376"/>
+  <circle cx="260" cy="170" r="6" fill="#FF8DA1"/>
+  <!-- Faces -->
+  <ellipse cx="195" cy="265" rx="35" ry="25" fill="#FCEBD9"/>
+  <circle cx="195" cy="255" r="8" fill="#3D2314"/>
+  <ellipse cx="315" cy="270" rx="35" ry="25" fill="#FFF0EC"/>
+  <circle cx="315" cy="260" r="8" fill="#3D2314"/>
+  <!-- Eyes -->
+  <circle cx="180" cy="240" r="6" fill="#3D2314"/><circle cx="215" cy="240" r="6" fill="#3D2314"/>
+  <path d="M295 245 Q305 235 315 245" stroke="#3D2314" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M325 245 Q335 235 345 245" stroke="#3D2314" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Cheeks -->
+  <circle cx="170" cy="255" r="12" fill="#FF8A80" opacity="0.6"/>
+  <circle cx="340" cy="260" r="12" fill="#FF8A80" opacity="0.6"/>
+  <!-- Hug Arms -->
+  <path d="M160 320 C210 330, 280 340, 310 300" stroke="#C68B59" stroke-width="26" stroke-linecap="round" fill="none"/>
+  <path d="M350 320 C300 340, 230 340, 200 310" stroke="#E8A598" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <!-- Floating Hearts -->
+  <path d="M256 100 C240 70, 200 80, 200 110 C200 145, 256 175, 256 185 C256 175, 312 145, 312 110 C312 80, 272 70, 256 100 Z" fill="#FF4081"/>
+  <path d="M340 90 C330 70, 305 75, 305 95 C305 115, 340 135, 340 140 C340 135, 375 115, 375 95 C375 75, 350 70, 340 90 Z" fill="#FF80AB"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="190" cy="200" r="70" fill="#C68B59"/>
+  <circle cx="315" cy="200" r="68" fill="#E8A598"/>
+  <circle cx="130" cy="145" r="26" fill="#C68B59"/>
+  <circle cx="375" cy="145" r="26" fill="#E8A598"/>
+  <circle cx="170" cy="190" r="6" fill="#3D2314"/><circle cx="210" cy="190" r="6" fill="#3D2314"/>
+  <circle cx="295" cy="190" r="6" fill="#3D2314"/><circle cx="335" cy="190" r="6" fill="#3D2314"/>
+  <!-- Cozy knitted red scarf wrapping both -->
+  <rect x="130" y="250" width="250" height="60" rx="30" fill="#E53935"/>
+  <rect x="220" y="290" width="45" height="90" rx="10" fill="#C62828"/>
+  <!-- Scarf fringe -->
+  <line x1="225" y1="380" x2="225" y2="400" stroke="#FFF" stroke-width="4"/>
+  <line x1="235" y1="380" x2="235" y2="400" stroke="#FFF" stroke-width="4"/>
+  <line x1="245" y1="380" x2="245" y2="400" stroke="#FFF" stroke-width="4"/>
+  <line x1="255" y1="380" x2="255" y2="400" stroke="#FFF" stroke-width="4"/>
+</svg>
