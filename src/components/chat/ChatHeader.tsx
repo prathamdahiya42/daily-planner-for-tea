@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { LogOut, Heart, Shield, Settings, Palette, Image as ImageIcon } from "lucide-react";
+import { LogOut, Heart, Shield, Settings, Palette, Image as ImageIcon, Trash2 } from "lucide-react";
 import { useRoom } from "@/context/RoomContext";
 import { useChat } from "@/context/ChatContext";
 import { calculateDaysTogether } from "@/lib/settings/room-settings";
