@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes steamFloat { 0% { opacity: 0.2; transform: translateY(0) scale(0.8); } 50% { opacity: 1; transform: translateY(-8px) scale(1.1); } 100% { opacity: 0.2; transform: translateY(-16px) scale(0.9); } }
+.steam { animation: steamFloat 2.2s ease-in-out infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<ellipse cx="128" cy="204" rx="64" ry="12" fill="#FBE6EC"/>
+<ellipse cx="128" cy="200" rx="58" ry="8" fill="#E59EA0"/>
+<path d="M80 128 L86 180 C88 194 168 194 170 180 L176 128 Z" fill="#FDF8F9" stroke="#D12E53" stroke-width="5"/>
+<path d="M174 140 C194 140 194 170 171 170" fill="none" stroke="#D12E53" stroke-width="5" stroke-linecap="round"/>
+<ellipse cx="128" cy="128" rx="48" ry="12" fill="#D4A373" stroke="#BC6C25" stroke-width="3"/>
+<g class="steam">
+  <path d="M128 72 C124 64 116 64 112 70 C108 76 120 92 128 98 C136 92 148 76 144 70 C140 64 132 64 128 72 Z" fill="#D12E53" opacity="0.85"/>
+</g>
+<circle cx="128" cy="162" r="10" fill="#FBC8D4"/>
+<path d="M128 157 C126 154 122 154 120 157 C118 160 124 167 128 170 C132 167 138 160 136 157 C134 154 130 154 128 157 Z" fill="#D12E53"/>
+</svg>

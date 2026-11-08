@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes starPulse { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(45deg); } }
+.star-eye { animation: starPulse 1.6s ease-in-out infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<circle cx="128" cy="128" r="76" fill="#FFD166" stroke="#F4A261" stroke-width="5"/>
+<g class="star-eye" transform="translate(80, 100)">
+  <path d="M15 0 L19 10 L30 15 L19 20 L15 30 L11 20 L0 15 L11 10 Z" fill="#D12E53"/>
+</g>
+<g class="star-eye" transform="translate(146, 100)">
+  <path d="M15 0 L19 10 L30 15 L19 20 L15 30 L11 20 L0 15 L11 10 Z" fill="#D12E53"/>
+</g>
+<ellipse cx="80" cy="140" rx="14" ry="7" fill="#F8B6CC"/>
+<ellipse cx="176" cy="140" rx="14" ry="7" fill="#F8B6CC"/>
+<path d="M106 142 C114 162 142 162 150 142" stroke="#28131B" stroke-width="5" stroke-linecap="round" fill="none"/>
+</svg>

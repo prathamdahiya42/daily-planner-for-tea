@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes flameFlicker { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06) rotate(1deg); } }
+.flame { animation: flameFlicker 1.5s ease-in-out infinite; transform-origin: center bottom; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="flame">
+  <path d="M128 30 C150 70 190 100 190 150 C190 190 160 220 128 220 C96 220 66 190 66 150 C66 100 106 70 128 30 Z" fill="#FF5D8F" opacity="0.4"/>
+  <path d="M128 60 C145 90 175 115 175 155 C175 185 152 210 128 210 C104 210 81 185 81 155 C81 115 111 90 128 60 Z" fill="#FFB703"/>
+  <path d="M128 178 l-12-11C90 144 75 130 75 114 a18 18 0 0 1 30-13 c6 5 11 10 11 10 s5-5 11-10 a18 18 0 0 1 30 13 c0 16-15 30-41 53 l-12 11 z" fill="#D12E53" stroke="#FFF" stroke-width="2"/>
+</g>
+</svg>

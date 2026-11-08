@@ -251,6 +251,19 @@ body {
   animation: popIn 140ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
+/* Playful dice wobble (Phase 4.3) */
+@keyframes diceWobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-20deg) scale(1.15); }
+  50% { transform: rotate(20deg) scale(1.15); }
+  75% { transform: rotate(-10deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.animate-wobble {
+  animation: diceWobble 450ms ease-in-out;
+}
+
 /* Text shimmer sweep on load (Phase 2) */
 @keyframes textShimmer {
   0% {

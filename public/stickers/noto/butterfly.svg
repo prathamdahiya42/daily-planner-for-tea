@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes wingFlapLeft { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.4); } }
+@keyframes wingFlapRight { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.4); } }
+.wing-left { animation: wingFlapLeft 1.2s ease-in-out infinite; transform-origin: 128px center; }
+.wing-right { animation: wingFlapRight 1.2s ease-in-out infinite; transform-origin: 128px center; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="wing-left">
+  <path d="M128 128 C100 60 40 70 45 115 C48 140 100 145 128 135 Z" fill="#F8B6CC" stroke="#D12E53" stroke-width="3"/>
+  <path d="M128 135 C95 140 55 160 65 195 C75 220 115 175 128 145 Z" fill="#FABBB5" stroke="#D12E53" stroke-width="3"/>
+  <circle cx="80" cy="115" r="8" fill="#FFF"/>
+</g>
+<g class="wing-right">
+  <path d="M128 128 C156 60 216 70 211 115 C208 140 156 145 128 135 Z" fill="#F8B6CC" stroke="#D12E53" stroke-width="3"/>
+  <path d="M128 135 C161 140 201 160 191 195 C181 220 141 175 128 145 Z" fill="#FABBB5" stroke="#D12E53" stroke-width="3"/>
+  <circle cx="176" cy="115" r="8" fill="#FFF"/>
+</g>
+<line x1="128" y1="100" x2="128" y2="165" stroke="#28131B" stroke-width="6" stroke-linecap="round"/>
+<circle cx="128" cy="94" r="7" fill="#28131B"/>
+<path d="M128 88 C122 75 110 70 105 72" stroke="#28131B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M128 88 C134 75 146 70 151 72" stroke="#28131B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

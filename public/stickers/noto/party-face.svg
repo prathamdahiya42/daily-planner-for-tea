@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes hornBlow { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-6deg); } }
+.horn { animation: hornBlow 1.5s ease-in-out infinite; transform-origin: 150px 165px; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<circle cx="128" cy="132" r="72" fill="#FFD166" stroke="#F4A261" stroke-width="5"/>
+<polygon points="128,40 100,95 156,95" fill="#D12E53"/>
+<circle cx="128" cy="38" r="8" fill="#FFE066"/>
+<path d="M92 122 C96 114 106 114 110 122" stroke="#28131B" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+<path d="M146 122 C150 114 160 114 164 122" stroke="#28131B" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+<ellipse cx="88" cy="140" rx="12" ry="6" fill="#FBC8D4"/>
+<ellipse cx="168" cy="140" rx="12" ry="6" fill="#FBC8D4"/>
+<g class="horn">
+  <polygon points="135,150 195,175 190,185 130,158" fill="#52B788"/>
+</g>
+</svg>

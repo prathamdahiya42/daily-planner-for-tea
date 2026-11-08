@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes sunSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.sun-rays { animation: sunSpin 24s linear infinite; transform-origin: 128px 128px; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="sun-rays">
+  <circle cx="128" cy="128" r="74" fill="#FFE066" stroke="#F4A261" stroke-width="5" stroke-dasharray="16 12"/>
+</g>
+<circle cx="128" cy="128" r="58" fill="#FFD166" stroke="#F4A261" stroke-width="4"/>
+<circle cx="106" cy="120" r="5.5" fill="#28131B"/>
+<circle cx="150" cy="120" r="5.5" fill="#28131B"/>
+<ellipse cx="94" cy="134" rx="10" ry="5.5" fill="#F8B6CC"/>
+<ellipse cx="162" cy="134" rx="10" ry="5.5" fill="#F8B6CC"/>
+<path d="M116 140 C122 150 134 150 140 140" stroke="#28131B" stroke-width="4" stroke-linecap="round" fill="none"/>
+</svg>

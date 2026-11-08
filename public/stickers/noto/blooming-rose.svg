@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes bloomPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+.rose-bloom { animation: bloomPulse 2s ease-in-out infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<path d="M128 150 C128 180 132 210 128 220" stroke="#2D6A4F" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path d="M128 175 C110 170 95 180 90 175 C100 160 120 165 128 175" fill="#52B788"/>
+<path d="M128 190 C145 185 160 195 165 190 C155 175 135 180 128 190" fill="#52B788"/>
+<g class="rose-bloom">
+  <circle cx="128" cy="110" r="48" fill="#D12E53"/>
+  <path d="M110 85 C125 75 145 85 145 95 C145 115 110 120 128 135" stroke="#FFF" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="128" cy="105" r="22" fill="#AB4250"/>
+</g>
+</svg>

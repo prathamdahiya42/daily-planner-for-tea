@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
-import { X, Sparkles, Dices, Star } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
+import { X, Dices, Clock, Sparkles, MessageSquareHeart, Coffee } from "lucide-react";
 import {
   STICKER_PACK,
-  MOOD_TABS,
-  StickerMood,
-  getStickerOfTheDay,
-  getRandomSticker,
+  NOTO_STICKER_PACK,
+  CAPTION_STICKER_PACK,
+  getStickerById,
+  getRandomCuteSticker,
+  getRecentStickerIds,
+  saveRecentStickerId,
   StickerDef,
 } from "@/lib/stickers/stickers";
 
@@ -16,46 +18,98 @@ interface StickerPickerProps {
   onClose: () => void;
 }
 
+type TabType = "recent" | "cute" | "captions" | "tea";
+
 export function StickerPicker({ onSelectSticker, onClose }: StickerPickerProps) {
-  const [activeMood, setActiveMood] = useState<StickerMood | "all" | "daily">("all");
-  const todaySticker = getStickerOfTheDay();
+  const [activeTab, setActiveTab] = useState<TabType>("cute");
+  const [recentStickers, setRecentStickers] = useState<StickerDef[]>([]);
+  const [isWobbling, setIsWobbling] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const filteredStickers =
-    activeMood === "daily"
-      ? [todaySticker]
-      : activeMood === "all"
-      ? STICKER_PACK
-      : STICKER_PACK.filter((s) => s.mood === activeMood);
+  useEffect(() => {
+    const ids = getRecentStickerIds();
+    const resolved = ids
+      .map((id) => getStickerById(id))
+      .filter((s): s is StickerDef => s !== undefined);
+    setRecentStickers(resolved);
+    // If no recents, default to cute tab
+    if (resolved.length === 0 && activeTab === "recent") {
+      setActiveTab("cute");
+    }
+  }, [activeTab]);
 
-  const handleSurprise = () => {
-    const random = getRandomSticker(activeMood === "daily" ? "all" : activeMood);
-    onSelectSticker(random.id);
+  const handleSelect = (sticker: StickerDef) => {
+    saveRecentStickerId(sticker.id);
+    onSelectSticker(sticker.id);
   };
 
+  const handleDiceRoll = () => {
+    setIsWobbling(true);
+    setTimeout(() => setIsWobbling(false), 500);
+
+    const random = getRandomCuteSticker();
+    handleSelect(random);
+  };
+
+  const currentStickers = useMemo(() => {
+    switch (activeTab) {
+      case "recent":
+        return recentStickers;
+      case "cute":
+        return NOTO_STICKER_PACK;
+      case "captions":
+        return CAPTION_STICKER_PACK;
+      case "tea":
+        return STICKER_PACK;
+    }
+  }, [activeTab, recentStickers]);
+
   return (
-    <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs flex flex-col justify-end">
-      <div className="w-full max-w-[420px] mx-auto bg-white rounded-t-3xl shadow-2xl flex flex-col max-h-[75vh] animate-in slide-in-from-bottom duration-200">
+    <div
+      className="fixed inset-0 z-40 bg-plum/40 backdrop-blur-xs flex flex-col justify-end select-none animate-fade-in"
+      onClick={onClose}
+    >
+      <div
+        className={`w-full max-w-[420px] mx-auto bg-surface rounded-t-[28px] shadow-2xl flex flex-col transition-all duration-300 ease-out border-t border-blush/60 ${
+          isExpanded ? "h-[500px]" : "h-[360px]"
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Drag Handle with Snap Points (Phase 4.3) */}
+        <div
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-full pt-3 pb-1.5 flex items-center justify-center cursor-pointer group"
+          title="Click to toggle expand/collapse"
+          aria-label="Toggle picker height"
+        >
+          <div className="w-10 h-1.5 rounded-full bg-blush group-hover:bg-rose transition-colors" />
+        </div>
+
         {/* Header */}
-        <div className="px-5 pt-4 pb-2 flex items-center justify-between border-b border-slate-100">
-          <div className="flex items-center gap-2">
-            <span className="text-lg">🧸</span>
-            <h2 className="text-sm font-bold text-slate-800">Bear Sticker Pack</h2>
+        <div className="px-4 py-2 flex items-center justify-between border-b border-blush/40">
+          <div className="flex items-center gap-1.5">
+            <h2 className="text-sm font-display font-bold text-plum">Stickers</h2>
+            <span className="text-[11px] font-hand text-rose">send some love 💕</span>
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* Surprise Button */}
+          <div className="flex items-center gap-1.5">
+            {/* Quick Random Cute Sticker Dice with Wobble (Phase 4.3) */}
             <button
-              onClick={handleSurprise}
-              className="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 active:scale-95 text-rose-600 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition border border-rose-200/60"
-              title="Send a random surprise sticker"
+              onClick={handleDiceRoll}
+              className={`px-3 py-1.5 bg-cream-2 hover:bg-blush/60 active:scale-95 text-crimson rounded-2xl text-xs font-bold flex items-center gap-1.5 transition border border-blush/60 ${
+                isWobbling ? "animate-wobble" : ""
+              }`}
+              title="Pick a random cute sticker!"
+              aria-label="Random cute sticker"
             >
-              <Dices className="w-3.5 h-3.5" />
-              Surprise!
+              <Dices className="w-4 h-4 text-crimson" />
+              <span>Random</span>
             </button>
 
+            {/* Close Button (>= 44px tap target) */}
             <button
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-slate-600 rounded-full"
+              className="w-11 h-11 flex items-center justify-center text-plum-soft hover:text-plum rounded-2xl transition"
               aria-label="Close stickers"
             >
               <X className="w-5 h-5" />
@@ -63,82 +117,90 @@ export function StickerPicker({ onSelectSticker, onClose }: StickerPickerProps) 
           </div>
         </div>
 
-        {/* Sticker of the Day Banner */}
-        <div className="mx-4 mt-3 p-3 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/70 rounded-2xl flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-12 h-12 rounded-xl bg-white p-1 border border-amber-200/80 shadow-xs flex items-center justify-center shrink-0">
-              <img
-                src={todaySticker.file}
-                alt={todaySticker.name}
-                className="w-full h-full object-contain"
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <div className="flex items-center gap-1 text-[11px] font-bold text-amber-800">
-                <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
-                Sticker of the Day
-              </div>
-              <p className="text-xs text-slate-700 font-semibold mt-0.5">{todaySticker.name}</p>
-              <span className="text-[10px] text-amber-700">Unlocked today only!</span>
-            </div>
-          </div>
-
-          <button
-            onClick={() => onSelectSticker(todaySticker.id)}
-            className="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 active:scale-95 text-white rounded-xl text-xs font-semibold shadow-xs transition"
-          >
-            Send
-          </button>
-        </div>
-
-        {/* Mood Tabs */}
-        <div className="px-4 py-2.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-          <button
-            onClick={() => setActiveMood("daily")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1 transition ${
-              activeMood === "daily"
-                ? "bg-amber-100 text-amber-800 shadow-xs"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-            }`}
-          >
-            <span>⭐</span>
-            Daily
-          </button>
-
-          {MOOD_TABS.map((tab) => (
+        {/* Tab Selector: Recent, Cute (Noto), Captions, Tea (Phase 4.3) */}
+        <div className="px-3 pt-2 pb-1.5 flex items-center gap-1.5 border-b border-blush/30 overflow-x-auto no-scrollbar">
+          {recentStickers.length > 0 && (
             <button
-              key={tab.id}
-              onClick={() => setActiveMood(tab.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1 transition ${
-                activeMood === tab.id
-                  ? "bg-rose-500 text-white shadow-xs"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+              onClick={() => setActiveTab("recent")}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 flex items-center gap-1.5 transition ${
+                activeTab === "recent"
+                  ? "bg-gradient-to-r from-crimson to-berry text-white shadow-xs"
+                  : "bg-cream-2 text-plum-soft hover:bg-blush/50"
               }`}
             >
-              <span>{tab.icon}</span>
-              {tab.label}
+              <Clock className="w-3.5 h-3.5" />
+              <span>Recent</span>
             </button>
-          ))}
+          )}
+
+          <button
+            onClick={() => setActiveTab("cute")}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 flex items-center gap-1.5 transition ${
+              activeTab === "cute"
+                ? "bg-gradient-to-r from-crimson to-berry text-white shadow-xs"
+                : "bg-cream-2 text-plum-soft hover:bg-blush/50"
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Cute</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("captions")}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 flex items-center gap-1.5 transition ${
+              activeTab === "captions"
+                ? "bg-gradient-to-r from-crimson to-berry text-white shadow-xs"
+                : "bg-cream-2 text-plum-soft hover:bg-blush/50"
+            }`}
+          >
+            <MessageSquareHeart className="w-3.5 h-3.5" />
+            <span>Captions</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("tea")}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 flex items-center gap-1.5 transition ${
+              activeTab === "tea"
+                ? "bg-gradient-to-r from-crimson to-berry text-white shadow-xs"
+                : "bg-cream-2 text-plum-soft hover:bg-blush/50"
+            }`}
+          >
+            <Coffee className="w-3.5 h-3.5" />
+            <span>Tea (Bears)</span>
+          </button>
         </div>
 
-        {/* Stickers Grid */}
-        <div className="p-4 grid grid-cols-4 gap-3 overflow-y-auto max-h-[45vh]">
-          {filteredStickers.map((sticker) => (
+        {/* Sticker Grid */}
+        <div
+          className={`flex-1 p-3 overflow-y-auto ${
+            activeTab === "captions" ? "grid grid-cols-2 gap-2.5" : "grid grid-cols-4 gap-2.5"
+          }`}
+        >
+          {currentStickers.map((sticker) => (
             <button
               key={sticker.id}
-              onClick={() => onSelectSticker(sticker.id)}
-              className="group aspect-square p-2 bg-slate-50 hover:bg-rose-50/70 border border-slate-100 hover:border-rose-200 rounded-2xl flex flex-col items-center justify-center transition active:scale-95"
+              onClick={() => handleSelect(sticker)}
+              className={`group p-2 rounded-2xl flex flex-col items-center justify-center transition active:scale-95 border ${
+                activeTab === "captions"
+                  ? "bg-cream-2/70 hover:bg-cream-2 border-blush/60 h-16"
+                  : "bg-cream-2/50 hover:bg-cream-2 border-blush/40 aspect-square"
+              }`}
+              title={sticker.name}
+              aria-label={sticker.name}
             >
-              <img
-                src={sticker.file}
-                alt={sticker.name}
-                className="w-full h-full object-contain drop-shadow-xs group-hover:scale-105 transition-transform"
-                loading="lazy"
-              />
-              <span className="text-[9px] text-slate-500 font-medium truncate w-full text-center mt-1">
-                {sticker.name}
-              </span>
+              <div className="w-full h-full flex items-center justify-center overflow-hidden">
+                <img
+                  src={sticker.file}
+                  alt={sticker.name}
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform"
+                  loading="lazy"
+                />
+              </div>
+              {activeTab !== "captions" && (
+                <span className="text-[9px] text-plum-soft font-body truncate w-full text-center mt-1">
+                  {sticker.name}
+                </span>
+              )}
             </button>
           ))}
         </div>

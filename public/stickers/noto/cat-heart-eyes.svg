@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes heartPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+.heart-eye { animation: heartPulse 1.4s ease-in-out infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<polygon points="70,55 95,105 50,95" fill="#FABBB5" stroke="#AB4250" stroke-width="4"/>
+<polygon points="186,55 161,105 206,95" fill="#FABBB5" stroke="#AB4250" stroke-width="4"/>
+<circle cx="128" cy="138" r="70" fill="#FFF" stroke="#AB4250" stroke-width="5"/>
+<g class="heart-eye" transform="translate(82, 110)">
+  <path d="M16 26l-2-2C6 16 2 12 2 8a6 6 0 0 1 10-4c2 0 4 1 4 3 1-2 3-3 5-3a6 6 0 0 1 6 6c0 4-4 8-12 16l-2 2z" fill="#D12E53"/>
+</g>
+<g class="heart-eye" transform="translate(142, 110)">
+  <path d="M16 26l-2-2C6 16 2 12 2 8a6 6 0 0 1 10-4c2 0 4 1 4 3 1-2 3-3 5-3a6 6 0 0 1 6 6c0 4-4 8-12 16l-2 2z" fill="#D12E53"/>
+</g>
+<polygon points="128,148 122,142 134,142" fill="#D12E53"/>
+<path d="M128 148 C124 156 114 156 110 152 M128 148 C132 156 142 156 146 152" stroke="#28131B" stroke-width="3" fill="none" stroke-linecap="round"/>
+<line x1="50" y1="140" x2="80" y2="142" stroke="#AB4250" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="48" y1="152" x2="78" y2="150" stroke="#AB4250" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="206" y1="140" x2="176" y2="142" stroke="#AB4250" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="208" y1="152" x2="178" y2="150" stroke="#AB4250" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

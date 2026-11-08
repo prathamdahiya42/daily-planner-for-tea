@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes purrFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.purr { animation: purrFloat 2.4s ease-in-out infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="purr">
+  <polygon points="70,55 95,105 50,95" fill="#FFCAD4" stroke="#D12E53" stroke-width="4"/>
+  <polygon points="186,55 161,105 206,95" fill="#FFCAD4" stroke="#D12E53" stroke-width="4"/>
+  <circle cx="128" cy="138" r="70" fill="#FFF0F5" stroke="#D12E53" stroke-width="4"/>
+  <path d="M90 125 C96 118 106 118 112 125" stroke="#28131B" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <path d="M144 125 C150 118 160 118 166 125" stroke="#28131B" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <ellipse cx="88" cy="142" rx="14" ry="8" fill="#F8B6CC"/>
+  <ellipse cx="168" cy="142" rx="14" ry="8" fill="#F8B6CC"/>
+  <polygon points="128,142 124,136 132,136" fill="#D12E53"/>
+  <path d="M128 142 C125 148 118 148 115 145 M128 142 C131 148 138 148 141 145" stroke="#28131B" stroke-width="3" fill="none" stroke-linecap="round"/>
+</g>
+</svg>

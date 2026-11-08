@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes faceFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes kissHeart { 0% { opacity: 0; transform: translate(0, 0) scale(0.4); } 50% { opacity: 1; transform: translate(25px, -20px) scale(1.1); } 100% { opacity: 0; transform: translate(45px, -45px) scale(0.9); } }
+.face-group { animation: faceFloat 2.4s ease-in-out infinite; transform-origin: center; }
+.kiss-heart { animation: kissHeart 2s ease-in-out infinite; transform-origin: 175px 150px; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="face-group">
+  <circle cx="120" cy="130" r="76" fill="#FFD166" stroke="#F4A261" stroke-width="5"/>
+  <path d="M78 122 C78 112 96 112 96 122" stroke="#28131B" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M138 126 L158 116 M138 116 L158 126" stroke="#28131B" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="80" cy="144" rx="12" ry="7" fill="#FBC8D4"/>
+  <path d="M118 148 C126 142 136 144 138 150 C136 156 126 158 118 152" fill="#D12E53" stroke="#AB4250" stroke-width="2"/>
+</g>
+<g class="kiss-heart" transform="translate(170, 130)">
+  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#D12E53" stroke="#FFF" stroke-width="1.5"/>
+</g>
+</svg>

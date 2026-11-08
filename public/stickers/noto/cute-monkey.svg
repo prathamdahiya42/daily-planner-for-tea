@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes monkeySway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(4deg); } }
+.monkey { animation: monkeySway 2.5s ease-in-out infinite; transform-origin: center bottom; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="monkey">
+  <circle cx="68" cy="130" r="28" fill="#BC6C25"/>
+  <circle cx="68" cy="130" r="16" fill="#FAEDCD"/>
+  <circle cx="188" cy="130" r="28" fill="#BC6C25"/>
+  <circle cx="188" cy="130" r="16" fill="#FAEDCD"/>
+  <circle cx="128" cy="130" r="64" fill="#BC6C25"/>
+  <ellipse cx="128" cy="142" rx="46" ry="38" fill="#FAEDCD"/>
+  <circle cx="106" cy="120" r="7" fill="#28131B"/>
+  <circle cx="104" cy="118" r="2.5" fill="#FFF"/>
+  <circle cx="150" cy="120" r="7" fill="#28131B"/>
+  <circle cx="148" cy="118" r="2.5" fill="#FFF"/>
+  <ellipse cx="94" cy="140" rx="10" ry="6" fill="#FBC8D4"/>
+  <ellipse cx="162" cy="140" rx="10" ry="6" fill="#FBC8D4"/>
+  <ellipse cx="128" cy="136" rx="8" ry="5" fill="#6B4350"/>
+  <path d="M116 152 C122 162 134 162 140 152" stroke="#28131B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+</g>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes bunnyHop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.bunny { animation: bunnyHop 2s ease-in-out infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="bunny">
+  <ellipse cx="98" cy="75" rx="14" ry="45" fill="#FFF" stroke="#E59EA0" stroke-width="4"/>
+  <ellipse cx="98" cy="75" rx="7" ry="32" fill="#FBC8D4"/>
+  <ellipse cx="158" cy="75" rx="14" ry="45" fill="#FFF" stroke="#E59EA0" stroke-width="4"/>
+  <ellipse cx="158" cy="75" rx="7" ry="32" fill="#FBC8D4"/>
+  <circle cx="128" cy="148" r="62" fill="#FFF" stroke="#E59EA0" stroke-width="4"/>
+  <circle cx="106" cy="138" r="6.5" fill="#28131B"/>
+  <circle cx="150" cy="138" r="6.5" fill="#28131B"/>
+  <ellipse cx="90" cy="154" rx="12" ry="7" fill="#F8B6CC"/>
+  <ellipse cx="166" cy="154" rx="12" ry="7" fill="#F8B6CC"/>
+  <polygon points="128,150 124,145 132,145" fill="#D12E53"/>
+  <path d="M128 150 C125 156 118 156 115 153 M128 150 C131 156 138 156 141 153" stroke="#28131B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+.glow-heart { animation: pulseGlow 1.8s ease-in-out infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<circle cx="128" cy="128" r="76" fill="#FBE6EC"/>
+<path d="M70 145 C90 135 110 140 128 145 C146 140 166 135 186 145" stroke="#BFD9F2" stroke-width="14" stroke-linecap="round" fill="none"/>
+<path d="M70 145 C90 135 110 140 128 145 C146 140 166 135 186 145" stroke="#F8B6CC" stroke-width="8" stroke-linecap="round" fill="none"/>
+<g class="glow-heart" transform="translate(114, 88)">
+  <path d="M14 24l-1.5-1.5C4 14 1 11 1 7a6 6 0 0 1 10-3c2 0 3 1 4 2 1-1 2-2 4-2a6 6 0 0 1 10 6c0 4-3 7-11 15l-1.5 1.5z" fill="#D12E53"/>
+</g>
+</svg>

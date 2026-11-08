@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes twinkle1 { 0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0.3; } 50% { transform: scale(1.15) rotate(45deg); opacity: 1; } }
+@keyframes twinkle2 { 0%, 100% { transform: scale(1.1) rotate(45deg); opacity: 1; } 50% { transform: scale(0.5) rotate(0deg); opacity: 0.3; } }
+.s1 { animation: twinkle1 1.8s ease-in-out infinite; transform-origin: 128px 128px; }
+.s2 { animation: twinkle2 1.8s ease-in-out infinite; transform-origin: 65px 75px; }
+.s3 { animation: twinkle1 2.2s ease-in-out infinite 0.4s; transform-origin: 195px 175px; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="s1" transform="translate(104, 104)">
+  <path d="M24 0 L29 17 L48 24 L29 31 L24 48 L19 31 L0 24 L19 17 Z" fill="#D12E53"/>
+</g>
+<g class="s2" transform="translate(50, 60)">
+  <path d="M15 0 L18 10 L30 15 L18 20 L15 30 L12 20 L0 15 L12 10 Z" fill="#FFE066"/>
+</g>
+<g class="s3" transform="translate(180, 160)">
+  <path d="M15 0 L18 10 L30 15 L18 20 L15 30 L12 20 L0 15 L12 10 Z" fill="#F8B6CC"/>
+</g>
+</svg>

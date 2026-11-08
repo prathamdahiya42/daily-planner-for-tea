@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes heartPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+@keyframes starTwinkle { 0%, 100% { opacity: 0.2; transform: scale(0.6) rotate(0deg); } 50% { opacity: 1; transform: scale(1.2) rotate(45deg); } }
+.main-heart { animation: heartPulse 1.8s ease-in-out infinite; transform-origin: center; }
+.star-1 { animation: starTwinkle 1.6s ease-in-out infinite; transform-origin: 50px 70px; }
+.star-2 { animation: starTwinkle 2s ease-in-out infinite 0.4s; transform-origin: 205px 60px; }
+.star-3 { animation: starTwinkle 1.8s ease-in-out infinite 0.8s; transform-origin: 195px 175px; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<defs>
+  <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#FF5D8F"/>
+    <stop offset="50%" stop-color="#D12E53"/>
+    <stop offset="100%" stop-color="#AB4250"/>
+  </linearGradient>
+</defs>
+<g class="main-heart">
+  <path d="M128 224l-18.4-16.8C44.4 148 10 116.8 10 78 10 46.4 34.8 22 66 22c17.6 0 34.4 8.2 45.6 21.2L128 62.4l16.4-19.2C155.6 30.2 172.4 22 190 22c31.2 0 56 24.4 56 56 0 38.8-34.4 70-99.6 129.2L128 224z" fill="url(#heartGrad)" stroke="#FFF" stroke-width="4"/>
+  <ellipse cx="88" cy="72" rx="20" ry="10" fill="#FFF" opacity="0.35" transform="rotate(-30 88 72)"/>
+</g>
+<g class="star-1" transform="translate(40, 60)">
+  <path d="M10 0 L13 7 L20 10 L13 13 L10 20 L7 13 L0 10 L7 7 Z" fill="#FFE066"/>
+</g>
+<g class="star-2" transform="translate(195, 50)">
+  <path d="M12 0 L15 8 L24 12 L15 16 L12 24 L9 16 L0 12 L9 8 Z" fill="#FFF"/>
+</g>
+<g class="star-3" transform="translate(185, 165)">
+  <path d="M8 0 L10 5 L16 8 L10 11 L8 16 L6 11 L0 8 L6 5 Z" fill="#FFE066"/>
+</g>
+</svg>

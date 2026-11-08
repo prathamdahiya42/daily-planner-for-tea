@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes cherryBounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+.cherry { animation: cherryBounce 1.6s ease-in-out infinite; transform-origin: 128px 65px; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<polygon points="75,145 88,205 168,205 181,145" fill="#FBE6EC" stroke="#D12E53" stroke-width="4"/>
+<line x1="102" y1="145" x2="108" y2="205" stroke="#E59EA0" stroke-width="3"/>
+<line x1="128" y1="145" x2="128" y2="205" stroke="#E59EA0" stroke-width="3"/>
+<line x1="154" y1="145" x2="148" y2="205" stroke="#E59EA0" stroke-width="3"/>
+<ellipse cx="128" cy="142" rx="60" ry="24" fill="#F8B6CC"/>
+<ellipse cx="128" cy="122" rx="48" ry="22" fill="#FDF8F9"/>
+<ellipse cx="128" cy="100" rx="36" ry="18" fill="#FBC8D4"/>
+<g class="cherry">
+  <circle cx="128" cy="65" r="14" fill="#D12E53"/>
+  <path d="M128 55 C132 40 145 35 150 36" stroke="#2D6A4F" stroke-width="3" fill="none" stroke-linecap="round"/>
+</g>
+</svg>

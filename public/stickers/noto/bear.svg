@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+<style>
+@keyframes bearFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
+@keyframes earWiggle { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-6deg); } }
+@keyframes heartFloat { 0%, 100% { opacity: 0.3; transform: scale(0.8) translateY(0); } 50% { opacity: 1; transform: scale(1.1) translateY(-10px); } }
+.bear-body { animation: bearFloat 2.6s ease-in-out infinite; transform-origin: center bottom; }
+.ear-left { animation: earWiggle 2s ease-in-out infinite; transform-origin: 75px 80px; }
+.ear-right { animation: earWiggle 2s ease-in-out infinite 0.3s; transform-origin: 181px 80px; }
+.float-heart { animation: heartFloat 2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; } }
+</style>
+<g class="bear-body">
+  <circle cx="75" cy="80" r="32" fill="#D4A373" class="ear-left" stroke="#BC6C25" stroke-width="6"/>
+  <circle cx="75" cy="80" r="18" fill="#F4A261" class="ear-left"/>
+  <circle cx="181" cy="80" r="32" fill="#D4A373" class="ear-right" stroke="#BC6C25" stroke-width="6"/>
+  <circle cx="181" cy="80" r="18" fill="#F4A261" class="ear-right"/>
+  <ellipse cx="128" cy="148" rx="72" ry="64" fill="#D4A373" stroke="#BC6C25" stroke-width="6"/>
+  <ellipse cx="128" cy="162" rx="36" ry="26" fill="#FAEDCD"/>
+  <circle cx="102" cy="136" r="8" fill="#28131B"/>
+  <circle cx="100" cy="133" r="2.5" fill="#FFF"/>
+  <circle cx="154" cy="136" r="8" fill="#28131B"/>
+  <circle cx="152" cy="133" r="2.5" fill="#FFF"/>
+  <ellipse cx="88" cy="154" rx="12" ry="7" fill="#FBC8D4" opacity="0.85"/>
+  <ellipse cx="168" cy="154" rx="12" ry="7" fill="#FBC8D4" opacity="0.85"/>
+  <ellipse cx="128" cy="154" rx="10" ry="7" fill="#28131B"/>
+  <path d="M128 161 C124 168 116 168 112 165 M128 161 C132 168 140 168 144 165" stroke="#28131B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+</g>
+<g class="float-heart" transform="translate(175, 45)">
+  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#D12E53"/>
+</g>
+</svg>
