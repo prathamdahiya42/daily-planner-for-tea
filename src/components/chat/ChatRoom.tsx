@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import { ArrowDown } from "lucide-react";
 import { useRoom } from "@/context/RoomContext";
 import { useChat } from "@/context/ChatContext";
 import { ChatHeader } from "./ChatHeader";
@@ -65,6 +66,9 @@ export function ChatRoom() {
   const [showSignalDrawer, setShowSignalDrawer] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showScrollBottomPill, setShowScrollBottomPill] = useState(false);
+  const [showJumpBottomBtn, setShowJumpBottomBtn] = useState(false);
+  const [unreadBelowCount, setUnreadBelowCount] = useState(0);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -76,11 +80,20 @@ export function ChatRoom() {
     applyTheme(getStoredTheme());
   }, []);
 
-  // Track scroll state for hairline header border (Phase 3.1)
+  // Track scroll state for hairline header border, jump-to-bottom, and auto-scroll threshold (Phase 5.1)
   const handleScroll = () => {
-    if (!scrollContainerRef.current) return;
-    const scrolled = scrollContainerRef.current.scrollTop > 8;
-    setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
+    const el = scrollContainerRef.current;
+    if (!el) return;
+
+    const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+    const scrolled = el.scrollTop > 8;
+    setIsScrolled(scrolled);
+    setShowJumpBottomBtn(distanceFromBottom > 400);
+
+    if (distanceFromBottom <= 120) {
+      setShowScrollBottomPill(false);
+      setUnreadBelowCount(0);
+    }
   };
 
   // Track initial history vs new messages so history never animates (Phase 3.2)
@@ -103,10 +116,28 @@ export function ChatRoom() {
     return newSet;
   }, [messages]);
 
-  // Auto-scroll to bottom on messages update or partner typing
+  // Smart auto-scroll (Phase 5.1)
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = scrollContainerRef.current;
+    if (!el) return;
+
+    const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+
+    // Within 120px of bottom or initial load -> smooth scroll to bottom
+    if (distanceFromBottom <= 120 || isInitialLoadRef.current) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Scrolled up > 120px: show "New messages ↓" pill without jerking scroll
+      setShowScrollBottomPill(true);
+      setUnreadBelowCount((c) => c + 1);
+    }
   }, [messages.length, isPartnerTyping]);
+
+  const scrollToBottom = () => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    setShowScrollBottomPill(false);
+    setUnreadBelowCount(0);
+  };
 
   // Hook shake detection for quick-hide
   useEffect(() => {
@@ -182,13 +213,21 @@ export function ChatRoom() {
       {/* Top Header with Glass Effect and Hairline Border (Phase 3.1) */}
       <ChatHeader onOpenSettings={() => setShowSettingsModal(true)} isScrolled={isScrolled} />
 
-      {/* Message Stream (strict internal scroll, never body - Phase 3.1) */}
+      {/* Message Stream with Scroll Anchoring (Phase 5.1 & 5.2) */}
       <main
         ref={scrollContainerRef}
         onScroll={handleScroll}
-        className="flex-1 px-3 py-2 overflow-y-auto flex flex-col justify-end"
+        style={{ overflowAnchor: "auto" }}
+        className="flex-1 px-3 py-2 overflow-y-auto flex flex-col justify-end relative"
         aria-live="polite"
       >
+        {/* Loading Indicator at top during history fetch (Phase 5.2) */}
+        {isLoadingMessages && messages.length > 0 && (
+          <div className="w-full flex items-center justify-center py-2 text-crimson shrink-0">
+            <HeartSteamIcon className="w-6 h-6 animate-pulse" />
+          </div>
+        )}
+
         {isLoadingMessages && messages.length === 0 ? (
           <div className="flex-1 flex items-center justify-center text-xs text-plum-soft gap-2 py-20 font-body">
             <HeartSteamIcon className="w-5 h-5 animate-pulse text-crimson" />
@@ -269,6 +308,35 @@ export function ChatRoom() {
 
         <div ref={bottomRef} />
       </main>
+
+      {/* Smart Auto-Scroll "New messages ↓" Pill (Phase 5.1) */}
+      {showScrollBottomPill && (
+        <button
+          onClick={scrollToBottom}
+          className="absolute bottom-20 left-1/2 -translate-x-1/2 z-30 px-3.5 py-1.5 rounded-full bg-surface/95 border border-blush shadow-lg flex items-center gap-1.5 text-xs text-crimson font-hand font-bold active:scale-95 transition animate-pop-in"
+          aria-label="Scroll to new messages"
+        >
+          <span className="w-2 h-2 rounded-full bg-crimson animate-pulse" />
+          <span>New messages ↓</span>
+        </button>
+      )}
+
+      {/* Jump-to-bottom Circular Button when scrolled > 400px (Phase 5.1) */}
+      {showJumpBottomBtn && !showScrollBottomPill && (
+        <button
+          onClick={scrollToBottom}
+          className="absolute bottom-20 right-4 z-30 w-9 h-9 rounded-full bg-surface/95 border border-blush shadow-md flex items-center justify-center text-plum-soft hover:text-plum active:scale-95 transition"
+          aria-label="Jump to bottom"
+          title="Jump to bottom"
+        >
+          <ArrowDown className="w-4 h-4" />
+          {unreadBelowCount > 0 && (
+            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-crimson text-white text-[9px] font-bold flex items-center justify-center">
+              {unreadBelowCount}
+            </span>
+          )}
+        </button>
+      )}
 
       {/* Input Bar with Glass Styling & dvh support (Phase 3.1) */}
       <ChatInput

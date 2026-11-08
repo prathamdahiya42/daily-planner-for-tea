@@ -264,6 +264,22 @@ body {
   animation: diceWobble 450ms ease-in-out;
 }
 
+/* Parallax decorative layer with scroll() timeline (Phase 5.3) */
+@supports (animation-timeline: scroll()) {
+  @keyframes patternParallax {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 0 -20px;
+    }
+  }
+  .room-chat-pattern {
+    animation: patternParallax linear;
+    animation-timeline: scroll();
+  }
+}
+
 /* Text shimmer sweep on load (Phase 2) */
 @keyframes textShimmer {
   0% {
