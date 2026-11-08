@@ -26,6 +26,7 @@ import { APP_CONFIG } from "@/config/app.config";
 import { registerPushSubscription, isIosDevice, isPwaStandalone } from "@/lib/push/client-push";
 import { useRoom } from "@/context/RoomContext";
 import { getStoredTheme, applyTheme, ThemeMode } from "@/lib/theme/theme";
+import { saveStoredThemePrefs } from "@/lib/theme/storage";
 
 interface RoomSettingsModalProps {
   settings: RoomSettings;
@@ -406,6 +407,10 @@ export function RoomSettingsModal({
                   onClick={() => {
                     setThemeMode(mode);
                     applyTheme(mode);
+                    saveStoredThemePrefs({
+                      mode: mode === "midnight" ? "dark" : mode === "blush" ? "light" : "auto",
+                      style: mode === "midnight" ? "glow" : "cozy",
+                    });
                   }}
                   className={`py-2 px-2 rounded-xl text-xs font-semibold border transition ${
                     themeMode === mode

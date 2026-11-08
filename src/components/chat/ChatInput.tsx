@@ -162,23 +162,23 @@ export function ChatInput({
           onChange={handlePhotoSelect}
         />
 
-        {/* Stickers Button (Sparkles icon, 44px tap target - Phase 3.1) */}
+        {/* Stickers Button (Sparkles icon) */}
         <button
           type="button"
           onClick={onOpenStickers}
-          className="w-11 h-11 rounded-2xl bg-cream-2/90 hover:bg-blush/50 active:scale-95 text-crimson flex items-center justify-center transition border border-blush/60 shrink-0"
+          className="w-10 h-10 rounded-full hover:bg-cream-2 text-rose hover:text-crimson active:scale-95 flex items-center justify-center transition shrink-0"
           title="Open Stickers"
           aria-label="Open stickers"
         >
           <Sparkles className="w-4 h-4" />
         </button>
 
-        {/* Photo Button (Camera icon, 44px tap target - Phase 3.1) */}
+        {/* Photo Button (Camera icon) */}
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
           disabled={isUploadingPhoto}
-          className="w-11 h-11 rounded-2xl bg-cream-2/90 hover:bg-blush/50 active:scale-95 text-berry flex items-center justify-center transition border border-blush/60 shrink-0 disabled:opacity-50"
+          className="w-10 h-10 rounded-full hover:bg-cream-2 text-rose hover:text-berry active:scale-95 flex items-center justify-center transition shrink-0 disabled:opacity-40"
           title="Send Encrypted Photo"
           aria-label="Send photo"
         >
@@ -189,19 +189,19 @@ export function ChatInput({
           )}
         </button>
 
-        {/* Quick Signal Button (Tea/Coffee icon, 44px tap target - Phase 3.1) */}
+        {/* Quick Signal Button (Tea/Coffee icon) */}
         <button
           type="button"
           onClick={onOpenSignals}
-          className="w-11 h-11 rounded-2xl bg-cream-2/90 hover:bg-blush/50 active:scale-95 text-rose flex items-center justify-center transition border border-blush/60 shrink-0"
+          className="w-10 h-10 rounded-full hover:bg-cream-2 text-rose hover:text-crimson active:scale-95 flex items-center justify-center transition shrink-0"
           title="Send Quick Signal"
           aria-label="Quick tea signal"
         >
           <Coffee className="w-4 h-4" />
         </button>
 
-        {/* Auto-expanding <textarea> up to 5 lines then scrolls internally (Phase 3.1) */}
-        <div className="flex-1 relative flex items-center min-h-[44px]">
+        {/* Auto-expanding <textarea> up to 5 lines then scrolls internally */}
+        <div className="flex-1 relative flex items-center min-h-[42px]">
           <textarea
             ref={textareaRef}
             rows={1}
@@ -209,15 +209,15 @@ export function ChatInput({
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             placeholder="say something sweet…"
-            className="w-full resize-none py-2.5 px-3.5 text-[16px] leading-[1.4] font-body bg-cream-2/80 border border-blush/70 rounded-2xl focus:outline-none focus:ring-2 focus:ring-crimson/30 focus:border-crimson text-plum placeholder:font-hand placeholder:text-rose placeholder:text-[16px] max-h-[120px] overflow-y-auto"
+            className="w-full resize-none py-2 px-3.5 text-[16px] leading-[1.4] font-body bg-surface border border-blush/80 rounded-2xl focus:outline-none focus:ring-2 focus:ring-crimson/30 focus:border-crimson text-plum placeholder:font-hand placeholder:text-rose placeholder:text-[16px] max-h-[120px] overflow-y-auto scrollbar-none"
           />
         </div>
 
-        {/* Send Button: 44px tap target with Heart Paper Plane icon (Phase 3.1) */}
+        {/* Send Button: High-contrast state differentiation */}
         <button
           type="submit"
           disabled={!text.trim() || isSubmitting}
-          className="w-11 h-11 rounded-2xl bg-gradient-to-r from-crimson to-berry hover:opacity-95 active:scale-95 text-white flex items-center justify-center transition shadow-soft disabled:opacity-40 disabled:scale-100 shrink-0"
+          className="w-10 h-10 rounded-full bg-gradient-to-r from-crimson to-berry text-white flex items-center justify-center transition shadow-soft hover:opacity-95 active:scale-95 disabled:opacity-25 disabled:shadow-none disabled:scale-100 shrink-0"
           aria-label="Send message"
         >
           <Send className="w-4 h-4 ml-0.5" />

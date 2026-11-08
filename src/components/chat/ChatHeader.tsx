@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { LogOut, Heart, Shield, Settings, Trash2 } from "lucide-react";
+import { LogOut, Heart, Shield, Settings, Palette, Image as ImageIcon } from "lucide-react";
 import { useRoom } from "@/context/RoomContext";
 import { useChat } from "@/context/ChatContext";
 import { calculateDaysTogether } from "@/lib/settings/room-settings";
@@ -10,10 +10,17 @@ import { HerAvatar } from "@/components/ui/BrandMotifs";
 
 interface ChatHeaderProps {
   onOpenSettings?: () => void;
+  onOpenAppearance?: () => void;
+  onOpenWallpaper?: () => void;
   isScrolled?: boolean;
 }
 
-export function ChatHeader({ onOpenSettings, isScrolled = false }: ChatHeaderProps) {
+export function ChatHeader({
+  onOpenSettings,
+  onOpenAppearance,
+  onOpenWallpaper,
+  isScrolled = false,
+}: ChatHeaderProps) {
   const { exitRoomAndWipe, nickname } = useRoom();
   const { isPartnerOnline, isPartnerTyping, roomSettings } = useChat();
   const [showExitConfirm, setShowExitConfirm] = useState(false);
@@ -94,9 +101,14 @@ export function ChatHeader({ onOpenSettings, isScrolled = false }: ChatHeaderPro
                   isPartnerTyping
                     ? "text-crimson font-bold animate-pulse"
                     : isPartnerOnline
-                    ? "text-emerald-700 font-bold"
+                    ? "font-bold"
                     : "text-rose"
                 }`}
+                style={
+                  isPartnerOnline
+                    ? { color: "var(--status-online, #34D399)" }
+                    : undefined
+                }
               >
                 {presenceText}
               </span>
@@ -111,7 +123,10 @@ export function ChatHeader({ onOpenSettings, isScrolled = false }: ChatHeaderPro
               )}
 
               <span className="text-blush">•</span>
-              <span className="flex items-center gap-0.5 text-emerald-700 font-medium">
+              <span
+                className="flex items-center gap-0.5 font-medium"
+                style={{ color: "var(--status-e2ee, #34D399)" }}
+              >
                 <Shield className="w-3 h-3" />
                 E2EE
               </span>
@@ -120,11 +135,35 @@ export function ChatHeader({ onOpenSettings, isScrolled = false }: ChatHeaderPro
         </div>
 
         <div className="flex items-center gap-1">
-          {/* Room Settings Button (>= 44px tap target) */}
+          {/* Appearance Style & Color Button */}
+          {onOpenAppearance && (
+            <button
+              onClick={onOpenAppearance}
+              className="w-10 h-10 flex items-center justify-center text-plum-soft hover:text-crimson active:scale-95 rounded-2xl transition"
+              title="Theme & Appearance"
+              aria-label="Theme & Appearance"
+            >
+              <Palette className="w-4 h-4" />
+            </button>
+          )}
+
+          {/* Chat Wallpaper Button */}
+          {onOpenWallpaper && (
+            <button
+              onClick={onOpenWallpaper}
+              className="w-10 h-10 flex items-center justify-center text-plum-soft hover:text-crimson active:scale-95 rounded-2xl transition"
+              title="Chat Wallpaper"
+              aria-label="Chat Wallpaper"
+            >
+              <ImageIcon className="w-4 h-4" />
+            </button>
+          )}
+
+          {/* Room Settings Button */}
           {onOpenSettings && (
             <button
               onClick={onOpenSettings}
-              className="w-11 h-11 flex items-center justify-center text-plum-soft hover:text-plum active:scale-95 rounded-2xl transition"
+              className="w-10 h-10 flex items-center justify-center text-plum-soft hover:text-plum active:scale-95 rounded-2xl transition"
               title="Room settings"
               aria-label="Room settings"
             >
@@ -132,15 +171,14 @@ export function ChatHeader({ onOpenSettings, isScrolled = false }: ChatHeaderPro
             </button>
           )}
 
-          {/* Exit Room & Wipe Button (>= 44px tap target) */}
+          {/* Exit Room & Wipe Button (Sleek 40px icon button) */}
           <button
             onClick={() => setShowExitConfirm(true)}
-            className="h-11 px-3 bg-cream-2 hover:bg-blush/50 active:scale-95 text-crimson rounded-2xl text-xs font-semibold flex items-center gap-1.5 transition ml-0.5 border border-blush/60"
+            className="w-10 h-10 flex items-center justify-center text-rose hover:text-crimson hover:bg-cream-2/60 active:scale-95 rounded-2xl transition border border-blush/40 ml-0.5"
             title="Exit room and erase all local data"
             aria-label="Exit room"
           >
-            <LogOut className="w-3.5 h-3.5" />
-            <span className="text-[11px] font-bold">Exit</span>
+            <LogOut className="w-4 h-4" />
           </button>
         </div>
       </header>

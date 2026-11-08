@@ -10,10 +10,24 @@ import { ChatInput } from "./ChatInput";
 import { StickerPicker } from "@/components/stickers/StickerPicker";
 import { RoomSettingsModal } from "./RoomSettingsModal";
 import { CodedSignalDrawer } from "@/components/signals/CodedSignalDrawer";
+import { AppearanceModal } from "./AppearanceModal";
+import { WallpaperModal } from "./WallpaperModal";
+import { WallpaperLayer } from "./WallpaperLayer";
 import { DecryptedMessage } from "@/lib/chat/types";
-import { BACKGROUND_THEMES } from "@/lib/settings/room-settings";
 import { HeartSteamIcon, SpeechBubbleHeartIcon } from "@/components/ui/BrandMotifs";
-import { applyTheme, getStoredTheme } from "@/lib/theme/theme";
+import {
+  getStoredThemePrefs,
+  saveStoredThemePrefs,
+  applyThemeToElement,
+  clearThemeFromElement,
+} from "@/lib/theme/storage";
+import { UserThemePrefs } from "@/lib/theme/types";
+import { WallpaperRecord } from "@/lib/wallpaper/types";
+import {
+  getActiveWallpaper,
+  saveActiveWallpaper,
+  clearActiveWallpaper,
+} from "@/lib/wallpaper/db";
 
 function formatDateChip(dateStr: string): string {
   const date = new Date(dateStr);
@@ -65,22 +79,36 @@ export function ChatRoom() {
   const [showStickerDrawer, setShowStickerDrawer] = useState(false);
   const [showSignalDrawer, setShowSignalDrawer] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [showAppearanceModal, setShowAppearanceModal] = useState(false);
+  const [showWallpaperModal, setShowWallpaperModal] = useState(false);
+
+  const [themePrefs, setThemePrefs] = useState<UserThemePrefs>(() => getStoredThemePrefs());
+  const [wallpaper, setWallpaper] = useState<WallpaperRecord | null>(null);
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollBottomPill, setShowScrollBottomPill] = useState(false);
   const [showJumpBottomBtn, setShowJumpBottomBtn] = useState(false);
   const [unreadBelowCount, setUnreadBelowCount] = useState(0);
 
+  const chatRootRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const isInitialLoadRef = useRef(true);
   const seenMessageIdsRef = useRef<Set<string>>(new Set());
 
-  // Apply dark/light theme on mount (Phase 3.4)
+  // Mount and apply theme scoped directly to chatRootRef (Hard Rule 2: Decoy stays neutral)
   useEffect(() => {
-    applyTheme(getStoredTheme());
+    applyThemeToElement(chatRootRef.current, themePrefs);
+  }, [themePrefs]);
+
+  // Load active wallpaper from IndexedDB dp_media
+  useEffect(() => {
+    getActiveWallpaper().then((rec) => {
+      if (rec) setWallpaper(rec);
+    });
   }, []);
 
-  // Track scroll state for hairline header border, jump-to-bottom, and auto-scroll threshold (Phase 5.1)
+  // Track scroll state for hairline header border and jump button
   const handleScroll = () => {
     const el = scrollContainerRef.current;
     if (!el) return;
@@ -96,13 +124,12 @@ export function ChatRoom() {
     }
   };
 
-  // Track initial history vs new messages so history never animates (Phase 3.2)
+  // Track initial history vs new messages so history never re-animates
   const newMessagesSet = useMemo(() => {
     const newSet = new Set<string>();
     if (messages.length === 0) return newSet;
 
     if (isInitialLoadRef.current) {
-      // First batch: all are historical, do not animate
       messages.forEach((m) => seenMessageIdsRef.current.add(m.id));
       isInitialLoadRef.current = false;
     } else {
@@ -116,18 +143,16 @@ export function ChatRoom() {
     return newSet;
   }, [messages]);
 
-  // Smart auto-scroll (Phase 5.1)
+  // Smart auto-scroll
   useEffect(() => {
     const el = scrollContainerRef.current;
     if (!el) return;
 
     const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
 
-    // Within 120px of bottom or initial load -> smooth scroll to bottom
     if (distanceFromBottom <= 120 || isInitialLoadRef.current) {
       bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     } else {
-      // Scrolled up > 120px: show "New messages ↓" pill without jerking scroll
       setShowScrollBottomPill(true);
       setUnreadBelowCount((c) => c + 1);
     }
@@ -139,7 +164,13 @@ export function ChatRoom() {
     setUnreadBelowCount(0);
   };
 
-  // Hook shake detection for quick-hide
+  // Quick hide with clean theme wipe
+  const handleQuickHide = () => {
+    clearThemeFromElement(chatRootRef.current);
+    quickHide();
+  };
+
+  // Shake detection for quick-hide
   useEffect(() => {
     let lastX = 0;
     let lastY = 0;
@@ -160,7 +191,7 @@ export function ChatRoom() {
         const speed = (delta / diffTime) * 10000;
 
         if (speed > 800) {
-          quickHide();
+          handleQuickHide();
         }
 
         lastX = current.x || 0;
@@ -177,7 +208,7 @@ export function ChatRoom() {
         window.removeEventListener("devicemotion", handleMotion);
       }
     };
-  }, [quickHide]);
+  }, []);
 
   // Triple-tap quick hide gesture anywhere on background
   const tripleTapCountRef = useRef<number>(0);
@@ -185,7 +216,13 @@ export function ChatRoom() {
 
   const handleBackgroundClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (target.closest("button") || target.closest("input") || target.closest("form") || target.closest("footer")) {
+    if (
+      target.closest("button") ||
+      target.closest("input") ||
+      target.closest("form") ||
+      target.closest("footer") ||
+      target.closest("header")
+    ) {
       return;
     }
 
@@ -194,7 +231,7 @@ export function ChatRoom() {
 
     if (tripleTapCountRef.current >= 3) {
       tripleTapCountRef.current = 0;
-      quickHide();
+      handleQuickHide();
     } else {
       tripleTapTimerRef.current = setTimeout(() => {
         tripleTapCountRef.current = 0;
@@ -202,26 +239,56 @@ export function ChatRoom() {
     }
   };
 
-  const currentTheme =
-    BACKGROUND_THEMES[roomSettings.backgroundTheme] || BACKGROUND_THEMES["warm-rose"];
+  const handleSaveTheme = (newPrefs: UserThemePrefs) => {
+    const saved = saveStoredThemePrefs(newPrefs);
+    setThemePrefs(saved);
+    applyThemeToElement(chatRootRef.current, saved);
+  };
+
+  const handleSaveWallpaper = async (
+    record: WallpaperRecord | null,
+    shareWithPartner: boolean
+  ) => {
+    if (record) {
+      await saveActiveWallpaper(record);
+      setWallpaper(record);
+      if (shareWithPartner) {
+        // Send a sweet coded signal / message informing partner
+        const label = record.type === "preset" ? "new matching gradient" : "new matching photo";
+        sendMessage(`💕 Set a ${label} wallpaper for our room!`);
+      }
+    } else {
+      await clearActiveWallpaper();
+      setWallpaper(null);
+    }
+  };
 
   return (
     <div
+      ref={chatRootRef}
       onClick={handleBackgroundClick}
-      className={`w-full max-w-[420px] mx-auto h-[100dvh] max-h-[100dvh] overflow-hidden ${currentTheme.bgClass} room-chat-pattern flex flex-col font-body select-none transition-colors duration-500 relative`}
+      className="w-full max-w-[420px] mx-auto h-[100dvh] max-h-[100dvh] overflow-hidden room-chat-pattern flex flex-col font-body select-none relative transition-colors duration-300"
     >
-      {/* Top Header with Glass Effect and Hairline Border (Phase 3.1) */}
-      <ChatHeader onOpenSettings={() => setShowSettingsModal(true)} isScrolled={isScrolled} />
+      {/* Fixed Wallpaper Layer */}
+      <WallpaperLayer wallpaper={wallpaper} />
 
-      {/* Message Stream with Scroll Anchoring (Phase 5.1 & 5.2) */}
+      {/* Top Header with Glass Effect and Hairline Border */}
+      <ChatHeader
+        onOpenSettings={() => setShowSettingsModal(true)}
+        onOpenAppearance={() => setShowAppearanceModal(true)}
+        onOpenWallpaper={() => setShowWallpaperModal(true)}
+        isScrolled={isScrolled}
+      />
+
+      {/* Message Stream with Scroll Anchoring */}
       <main
         ref={scrollContainerRef}
         onScroll={handleScroll}
         style={{ overflowAnchor: "auto" }}
-        className="flex-1 px-3 py-2 overflow-y-auto flex flex-col justify-end relative"
+        className="flex-1 px-3 py-2 overflow-y-auto flex flex-col justify-end relative z-10"
         aria-live="polite"
       >
-        {/* Loading Indicator at top during history fetch (Phase 5.2) */}
+        {/* Loading Indicator at top during history fetch */}
         {isLoadingMessages && messages.length > 0 && (
           <div className="w-full flex items-center justify-center py-2 text-crimson shrink-0">
             <HeartSteamIcon className="w-6 h-6 animate-pulse" />
@@ -264,7 +331,7 @@ export function ChatRoom() {
 
               return (
                 <React.Fragment key={msg.id}>
-                  {/* Sticky Date Chip (Phase 3.3) */}
+                  {/* Sticky Date Chip */}
                   {showDateChip && (
                     <div className="sticky top-2 z-10 mx-auto my-2.5">
                       <span className="px-3 py-0.5 rounded-full font-display italic text-[11px] bg-surface/90 border border-blush/70 text-plum-soft shadow-xs backdrop-blur-xs">
@@ -291,7 +358,7 @@ export function ChatRoom() {
           </div>
         )}
 
-        {/* Partner Typing Indicator: 3 bouncing hearts + HeartSteamIcon + Caveat (Phase 3.3) */}
+        {/* Partner Typing Indicator */}
         {isPartnerTyping && (
           <div className="h-7 flex items-center gap-1.5 px-3 py-1 my-1 self-start rounded-full bg-surface/80 border border-blush/60 shadow-xs animate-fade-in">
             <HeartSteamIcon className="w-3.5 h-3.5 text-crimson animate-pulse" />
@@ -309,7 +376,7 @@ export function ChatRoom() {
         <div ref={bottomRef} />
       </main>
 
-      {/* Smart Auto-Scroll "New messages ↓" Pill (Phase 5.1) */}
+      {/* Smart Auto-Scroll "New messages ↓" Pill */}
       {showScrollBottomPill && (
         <button
           onClick={scrollToBottom}
@@ -321,7 +388,7 @@ export function ChatRoom() {
         </button>
       )}
 
-      {/* Jump-to-bottom Circular Button when scrolled > 400px (Phase 5.1) */}
+      {/* Jump-to-bottom Circular Button when scrolled > 400px */}
       {showJumpBottomBtn && !showScrollBottomPill && (
         <button
           onClick={scrollToBottom}
@@ -338,7 +405,7 @@ export function ChatRoom() {
         </button>
       )}
 
-      {/* Input Bar with Glass Styling & dvh support (Phase 3.1) */}
+      {/* Input Bar with Glass Styling & dvh support */}
       <ChatInput
         onSendMessage={sendMessage}
         onOpenStickers={() => setShowStickerDrawer(true)}
@@ -380,6 +447,24 @@ export function ChatRoom() {
           onSave={updateRoomSettings}
           onClose={() => setShowSettingsModal(false)}
           roomId={roomId}
+        />
+      )}
+
+      {/* Appearance Style & Color Modal */}
+      {showAppearanceModal && (
+        <AppearanceModal
+          prefs={themePrefs}
+          onSavePrefs={handleSaveTheme}
+          onClose={() => setShowAppearanceModal(false)}
+        />
+      )}
+
+      {/* Wallpaper Modal */}
+      {showWallpaperModal && (
+        <WallpaperModal
+          currentWallpaper={wallpaper}
+          onSave={handleSaveWallpaper}
+          onClose={() => setShowWallpaperModal(false)}
         />
       )}
     </div>
